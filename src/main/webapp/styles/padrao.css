@@ -1,0 +1,110 @@
+#menuEsquerdo a {
+	background-color: transparent
+}
+
+#topbar .topbar-main, #topbar #topbar-search input {
+	background-color: #a0a0a0;
+}
+
+#wrapper, #sidebar, .navbar-static-side ul li, #topbar .navbar-header {
+	background-color: #5F4B90;
+}
+
+.page-title-breadcrumb, ul.nav.nav-tabs li.active a {
+	background-color: #423551;
+}
+
+ul.nav.nav-tabs li.active a {
+	border-bottom: 2px solid #2EBAEF;
+}
+
+ul.nav.nav-tabs {
+	border: 0 !important;
+}
+
+.navbar-static-side ul li {
+	border: 0;
+}
+
+.navbar-static-side ul li a:hover, .navbar-static-side ul li a:focus {
+	background-color: #8272AB;
+}
+
+.navbar-static-side ul li.active a {
+	background-color: #554B88;
+}
+
+#avatar {
+	width: 80px;
+	height: 80px;
+}
+
+.page-title {
+	color: white;
+	font-weight: bold;
+}
+
+.form-control {
+	border-left: 0;
+	border-right: 0;
+	border-top: 0;
+}
+
+#lastname {
+	border-color: red;
+}
+
+.error-msg {
+	color: red;
+}
+
+.section-text {
+	color: #5F4B90;
+	font-weight: bold;
+}
+
+.page-content {
+	background-color: white;
+}
+
+.selectdemoSelectHeader {
+	/* Please note: All these selectors are only applied to children of elements with the 'selectdemoSelectHeader' class */
+	
+}
+
+.selectdemoSelectHeader .demo-header-searchbox {
+	border: none;
+	outline: none;
+	height: 100%;
+	width: 100%;
+	padding: 0;
+}
+
+.selectdemoSelectHeader .demo-select-header {
+	box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1), 0 0 0 0 rgba(0, 0, 0, 0.14), 0
+		0 0 0 rgba(0, 0, 0, 0.12);
+	padding-left: 10.667px;
+	height: 48px;
+	cursor: pointer;
+	position: relative;
+	display: flex;
+	align-items: center;
+	width: auto;
+}
+
+.selectdemoSelectHeader md-content._md {
+	max-height: 240px;
+}
+
+hr.dotted {
+	border-top: solid 1px;
+	color: rgba(0,0,0,0.25)
+}
+
+h3.topico {
+	color: rgba(0,0,0,0.67)
+}
+
+h4.topico {
+	color: rgba(0,0,0,0.67)
+}

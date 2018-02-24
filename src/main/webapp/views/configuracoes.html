@@ -1,0 +1,32 @@
+<md-content layout="column" layout-fill layout-align="center center">
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<md-button 
+				ng-click="toggleMenu()"
+	            class="md-icon-button" 
+	            aria-label="Menu">
+	            <i class="fa fa-bars" aria-hidden="true"></i>
+	        </md-button>
+	        
+			<!-- NOME DO FORMULARIO -->
+			<h2 class="md-flex">CONFIGURAÇÕES</h2>
+		</div>
+	</md-toolbar>
+	<div flex layout layout-padding layout-align="start none">
+		<md-input-container>
+	        <label>Idioma</label>
+			<md-select ng-model="config.tipo_idioma" aria-label="Idioma">
+	        	<md-optgroup>
+	            	<md-option ng-value="flag.id" ng-repeat="flag in flags">
+	            		<md-icon><span class="flag-icon flag-icon-squared" ng-class="flag.bandeira"></span></md-icon>
+	            		&nbsp;<span ng-bind="flag.titulo"></span>
+	            	</md-option>
+	          	</md-optgroup>
+	        </md-select>
+		</md-input-container>
+		<md-input-container>
+	        <label>Banco</label>
+	        <input ng-model="config.banco">
+	    </md-input-container>
+	</div>
+</md-content>

@@ -1,0 +1,57 @@
+<md-dialog aria-label="Adicionar foto">
+	<md-toolbar class="md-primary">
+		<div class="md-toolbar-tools">
+			<h2 ng-bind="componente.alias"></h2>
+			<span flex></span>
+			<bc-upload-file callback="imagemSelecionada" componente="componente"
+				accept="componente.detalhamento.extensoesPermitidas" style="width:40px;">
+				<md-button class="md-icon-button" md-autofocus>
+					<i class="fa fa-upload"></i>
+					<md-tooltip>Carregar foto</md-tooltip>
+				</md-button>
+			</bc-upload-file>
+			<md-button type="submit" ng-click="recortar()" class="md-icon-button">
+				<i class="fa fa-scissors"></i>
+				<md-tooltip>Recortar</md-tooltip>
+			</md-button>
+			<span> | </span>
+			<md-button class="md-icon-button" ng-click="fn.close()">
+				<i class="fa fa-times"></i>
+				<md-tooltip>Fechar</md-tooltip>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<md-dialog-content layout="column" layout-margin layout-warp layout-align="center center">
+		<img 
+			id="imgProfile" 
+			ng-src="{{componente.modelo[componente.ultimaReferencia] || componente.detalhamento.imagemPadrao}}" 
+			style="max-width: 100%;" height="200" width="auto"/>
+		<md-input-container ng-if="componenteLegenda"> 
+			<!-- Placeholder -->
+			<label 
+				ng-bind="componenteLegenda.alias"></label> 
+			<!-- Input -->
+			<input 
+				ng-model="componenteLegenda.modelo[componenteLegenda.ultimaReferencia]"
+				name="{{componenteLegenda.referencia}}"
+				ng-disabled="componenteLegenda.habilitado===false" 
+				type="text"
+				ng-pattern="componenteLegenda.validacao.pattern.valor"
+				ng-required="componenteLegenda.validacao.required.valor"
+				minlength="{{componenteLegenda.validacao.minlength.valor}}" 
+				maxlength="{{componenteLegenda.validacao.maxlength.valor}}" />
+			<!-- Validações --> 
+			<div 
+				ng-messages="masterForm[componenteLegenda.referencia].$error" 
+				md-auto-hide="false" 
+				role="alert">
+				<div 
+					ng-repeat="(validacao, opcoes) in componenteLegenda.validacao" 
+					ng-message="{{validacao}}" ng-bind="opcoes.erro"></div>
+		 	</div>
+		</md-input-container>
+		<div ng-if="!imagemAberta" flex>
+			<span>Selecione uma imagem <b>clicando no ícone <i class="fa fa-upload"></i></b></span>
+		</div>
+	</md-dialog-content>
+</md-dialog>

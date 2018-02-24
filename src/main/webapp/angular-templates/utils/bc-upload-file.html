@@ -1,0 +1,13 @@
+<input hide 
+	name="{{componente.referencia}}"
+	ng-required="componente.validacao.required.valor"
+	type="file" /><ng-transclude></ng-transclude>
+<div 
+	ng-messages="masterForm[componente.referencia].$error" 
+	md-auto-hide="false" 
+	role="alert">
+	<div 
+		ng-repeat="(validacao, opcoes) in componente.validacao" 
+		ng-message="{{validacao}}" ng-bind="opcoes.erro">
+	</div>
+</div>

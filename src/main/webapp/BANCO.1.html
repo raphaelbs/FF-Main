@@ -1,0 +1,915 @@
+﻿<html>
+<head>
+<title>:</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="images/icons/favicon.ico">
+<link rel="apple-touch-icon" href="images/icons/favicon.png">
+<link rel="apple-touch-icon" sizes="72x72"
+	href="images/icons/favicon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114"
+	href="images/icons/favicon-114x114.png">
+<!--Loading bootstrap css-->
+<link type="text/css" rel="stylesheet"
+	href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
+<link type="text/css" rel="stylesheet"
+	href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
+<link type="text/css" rel="stylesheet"
+	href="styles/jquery-ui-1.10.4.custom.min.css">
+<link type="text/css" rel="stylesheet"
+	href="styles/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="styles/animate.css">
+<link type="text/css" rel="stylesheet" href="styles/all.css">
+<link type="text/css" rel="stylesheet" href="styles/main.css">
+<link type="text/css" rel="stylesheet"
+	href="styles/style-responsive.css">
+<link type="text/css" rel="stylesheet"
+	href="styles/zabuto_calendar.min.css">
+<link type="text/css" rel="stylesheet" href="styles/pace.css">
+<link type="text/css" rel="stylesheet"
+	href="styles/jquery.news-ticker.css">
+<link type="text/css" rel="stylesheet" href="styles/padrao.css">
+<!-- Loading bootstrap DataTable -->
+<link href="styles/jquery.dataTables.css" rel="stylesheet">
+<!--LOADING SCRIPTS FOR CORE JQUERY-->
+<script src="script/jquery-1.10.2.min.js"></script>
+<!--LOADING SCRIPTS FOR DATA TABLE-->
+<script src="script/jquery.dataTables.js"></script>
+<!--LOADING SCRIPTS AND STYLES FOR TREE VIEW -->
+<link type="text/css" rel="stylesheet"
+	href="styles/bootstrap-treeview.css">
+<script src="script/bootstrap-treeview.js"></script>
+<!--LOADING SCRIPTS AND STYLES FOR ANGULAR -->
+<script type="text/javascript" src="script/angular.min.js"></script>
+<script type="text/javascript" src="script/angular-animate.min.js"></script>
+<script type="text/javascript" src="script/angular-aria.min.js"></script>
+<script type="text/javascript" src="script/angular-messages.min.js"></script>
+<!--LOADING SCRIPTS AND STYLES FOR ANGULAR MATERIAL -->
+<script type="text/javascript" src="script/angular-material.min.js"></script>
+<link rel="stylesheet" href="styles/angular-material.min.css">
+<!--LOADING SCRIPTS FOR CORE PAGE-->
+<script type='text/javascript' src='RESOURCES.js'></script>
+<script type='text/javascript' src='CONFIG.js'></script>
+<script type='text/javascript' src='GLOBAL.js'></script>
+<script type='text/javascript' src='BANCO.1.js'></script>
+</head>
+<body>
+	<div>
+		<!--BEGIN BACK TO TOP-->
+		<a id="totop" href="#"><i class="fa fa-angle-up"></i></a>
+		<!--END BACK TO TOP-->
+		<!--BEGIN TOPBAR-->
+		<div id="header-topbar-option-demo" class="page-header-topbar">
+			<nav id="topbar" role="navigation" style="margin-bottom: 0;"
+				data-step="3" class="navbar navbar-default navbar-static-top">
+				<div class="navbar-header">
+					<button type="button" data-toggle="collapse"
+						data-target=".sidebar-collapse" class="navbar-toggle">
+						<span class="sr-only">Toggle navigation</span><span
+							class="icon-bar"></span><span class="icon-bar"></span><span
+							class="icon-bar"></span>
+					</button>
+					<a id="logo" href="index.html" class="navbar-brand"><span
+						class="fa fa-home"></span><span class="logo-text">ECV</span><span
+						style="display: none" class="logo-text-icon">µ</span></a>
+				</div>
+				<div class="topbar-main">
+					<a id="menu-toggle" href="#" class="hidden-xs"><i
+						class="fa fa-bars"></i></a>
+					<ul class="nav navbar navbar-top-links navbar-right mbn">
+						<li class="dropdown"><a data-hover="dropdown" href="#"
+							class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span
+								class="badge badge-green">0</span></a></li>
+						<li class="dropdown"><a data-hover="dropdown" href="#"
+							class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span
+								class="badge badge-orange">0</span></a></li>
+						<li class="dropdown"><a data-hover="dropdown" href="#"
+							class="dropdown-toggle"><i class="fa fa-tasks fa-fw"></i><span
+								class="badge badge-yellow">0</span></a></li>
+						<li class="dropdown topbar-user"><a data-hover="dropdown"
+							href="#" class="dropdown-toggle"><img
+								src="images/avatar/48.jpg" alt=""
+								class="img-responsive img-circle" />&nbsp;<span
+								class="hidden-xs" id='NomeUsuarioInfCabecalho'></span>&nbsp;<span
+								class="caret"></span></a>
+							<ul class="dropdown-menu dropdown-user pull-right">
+								<li><a href="#"><i class="fa fa-user"></i>Meu Perfil</a></li>
+								<li><a href="#"><i class="fa fa-calendar"></i>Meu
+										Calendario</a></li>
+								<li><a href="#"><i class="fa fa-envelope"></i>Caixa de
+										Entrada<span class="badge badge-danger">3</span></a></li>
+								<li><a href="#"><i class="fa fa-tasks"></i>Minhas
+										Tarefas<span class="badge badge-success">7</span></a></li>
+								<li class="divider"></li>
+								<li><a href="#"><i class="fa fa-lock"></i>Travar Tela</a></li>
+								<li><a onclick="javascript:sairDoSistema();"><i
+										class="fa fa-key"></i>Sair</a></li>
+							</ul></li>
+						<li id="topbar-chat" class="hidden-xs"><a
+							href="javascript:void(0)" data-step="4"
+							data-intro="&lt;b&gt;Form chat&lt;/b&gt; mantenha se conectado a outros colaboradores"
+							data-position="left" class="btn-chat"><i
+								class="fa fa-comments"></i><span class="badge badge-info">0</span></a></li>
+					</ul>
+					<ul class="nav navbar navbar-top-links navbar-right mbn">
+						<li class="dropdown"><a data-hover="dropdown" href="#"
+							class="dropdown-toggle"> <i class="fa fa-building"></i>
+								Alterar Empresa
+						</a>
+							<ul class="dropdown-menu dropdown-user pull-right"
+								id='cbo_AlterarEmpresa'>
+							</ul></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+		<!--END TOPBAR-->
+		<div id="wrapper">
+			<!--BEGIN SIDEBAR MENU-->
+			<nav id="sidebar" role="navigation" data-step="2"
+				data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;"
+				data-position="right" class="navbar-default navbar-static-side">
+				<div class="sidebar-collapse menu-scroll">
+					<div id="menuEsquerdo"
+						style='font-size: 13px; text-transform: capitalize'></div>
+					<!--  
+      	<ul id="side-menu" class="nav nav-list"> 
+          </ul> 
+      	-->
+
+				</div>
+			</nav>
+			<!--END SIDEBAR MENU-->
+			<!--BEGIN PAGE WRAPPER-->
+			<div id="page-wrapper">
+				<!--BEGIN TITLE & BREADCRUMB PAGE-->
+				<div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+					<div class="page-header pull-left" style="width: 95%">
+						<div class="row">
+							<div class="col-md-9">
+								<div class="page-title" id="tituloPagina"
+									style='text-transform: capitalize'>R&aacute;dio</div>
+								<br />
+							</div>
+							<div class="col-md-3 center-block">
+								<a href="#">Layout</a> : <a href="#"
+									onclick="javascript:exibirComoTabela('#painelDetalhe_MENSAGEM');"><i
+									class="fa fa-table"></i> Tabela</a> | <a href="#"
+									onclick="javascript:exibirComoDetalhe('#painelDetalhe_MENSAGEM');"><i
+									class="fa fa-list"></i> Lista</a>
+							</div>
+						</div>
+						<ul id="generalTab"
+							class="nav nav-tabs responsive hidden-xs hidden-sm">
+							<li class=""><a href="#GRADE_ENTIDADE-tab"
+								data-toggle="tab" id='SelecionaGradeExibicao'><span
+									id='tituloGradeExibicao' style="text-transform: capitalize;">Grade
+										de Exibi&ccedil;&atilde;o</span></a></li>
+							<li class="active" id='tituloInformacoesGerais'><a
+								href="#ENTIDADE-tab" data-toggle="tab"
+								id='SelecionaInformacoesGerais'>Informa&ccedil;&otilde;es
+									Gerais</a></li>
+						</ul>
+						<div id="generalTabContent" class="tab-content responsive">
+							<div id="ENTIDADE-tab" class="tab-pane fade in active">
+								<!--BEGIN CONTENT-->
+								<div class="page-content">
+									<div class='row' style='color: #C0C0C0;'>
+										<a style="cursor: pointer"
+											onclick="javascript:PrepararFormInclusao(['#frmCRUD_ENTIDADE','#frmMENSAGEM_MENSAGEM_DESTINATARIOs','#frmMENSAGEM_MENSAGEM_ANEXOs'], ['#MENSAGEM_MENSAGEM_DESTINATARIOs','#MENSAGEM_MENSAGEM_ANEXOs']);"><i
+											class="fa fa-file-o"></i> Novo</a> | <a style="cursor: pointer"
+											onclick="javascript:ListarTodos('#dtGrade_ENTIDADE','RADIO','','#tituloGradeExibicao',true);"><i
+											class="fa fa-search"></i> Listar</a> | <a style="cursor: pointer"
+											onclick="javascript:PrepararFormEdicao('#frmCRUD_ENTIDADE');"><i
+											class="fa fa-pencil fa-fw"></i> Editar</a> | <a
+											style="cursor: pointer"
+											onclick="javascript:PrepararFormExclusao('#frmCRUD_ENTIDADE');"><i
+											class="fa fa-trash-o fa-fw"></i> Excluir</a> | <a
+											style="cursor: pointer"
+											onclick="javascript:EnviarDadosParaBackEnd('#frmCRUD_ENTIDADE');"><i
+											class="fa fa-floppy-o"></i> Gravar</a> | <a
+											style="cursor: pointer"><i class="fa fa-cogs"></i>
+											Preferencias</a>
+									</div>
+									<hr />
+									<div class="container-fluid" id="painelDetalhe_ENTIDADE">
+										<form id='frmCRUD_ENTIDADE' method='POST'
+											onsubmit='javascript:Inserir();'>
+											<div class="form-group">
+												<label style='text-transform: capitalize'>id</label><br />
+												<input id='ID__CHAVE_SEQUENCIAL' name='ID__CHAVE_SEQUENCIAL'
+													type='number' />
+											</div>
+											<div class="form-group">
+												<label style='text-transform: capitalize'>cnpj</label><br />
+												<input id='CNPJ' name='CNPJ' maxlength='14' type='text'
+													size='20' />
+											</div>
+											<div class="form-group">
+												<label style='text-transform: capitalize'>nome
+													fantasia</label><br /> <input id='NOME_FANTASIA_OU_APELIDO'
+													name='NOME_FANTASIA_OU_APELIDO' maxlength='40' type='text'
+													size='40' />
+											</div>
+											<div class="form-group">
+												<label style='text-transform: capitalize'>raz&atilde;o
+													social</label><br /> <input id='RAZAO_SOCIAL' name='RAZAO_SOCIAL'
+													maxlength='40' type='text' size='60' />
+											</div>
+										</form>
+										<hr />
+										<ul id="detalhesTabHeader"
+											class="nav nav-tabs responsive hidden-xs hidden-sm">
+											<li class="active"><a href="#ENTIDADE_ENDERECO-tab"
+												data-toggle="tab"><span
+													style='text-transform: capitalize'>endere&ccedil;o</span></a></li>
+											<li class=""><a href="#ENTIDADE_CONTATO-tab"
+												data-toggle="tab"><span
+													style='text-transform: capitalize'>contatos</span></a></li>
+											<li class=""><a href="#ENTIDADE_AGENDA-tab"
+												data-toggle="tab"><span
+													style='text-transform: capitalize'>agenda</span></a></li>
+											<li class=""><a href="#ENTIDADE_DADOS_TECNICOS-tab"
+												data-toggle="tab"><span
+													style='text-transform: capitalize'>dados
+														t&eacute;cnicos</span></a></li>
+											<li class=""><a href="#ENTIDADE_COMERCIAL-tab"
+												data-toggle="tab"><span
+													style='text-transform: capitalize'>comercial</span></a></li>
+											<li class=""><a href="#ENTIDADE_PERFIL-tab"
+												data-toggle="tab"><span
+													style='text-transform: capitalize'>perfil</span></a></li>
+											<li class=""><a href="#ENTIDADE_LOGIN-tab"
+												data-toggle="tab"><span
+													style='text-transform: capitalize'>login</span></a></li>
+										</ul>
+										<div id="detalhesTabContent" class="tab-content">
+											<div id="ENTIDADE_ENDERECO-tab"
+												class="tab-pane fade in active">
+												<!--BEGIN CONTENT-->
+												<div class="page-content">
+													<form id='frmENDERECO'>
+														<!-- Endereço -->
+														<div class="form-group">
+															<label>Tipo do Logradouro</label><br /> <select
+																id='TIPO_DO_LOGRADOURO_TIPO_DE_VIA'
+																name='ENDERECO.TIPO_DO_LOGRADOURO_TIPO_DE_VIA'>
+																<option></option>
+															</select>
+														</div>
+														<div class="form-group">
+															<label style='text-transform: capitalize'>logradouro
+																/ numero</label><br /> <input class="col-sm-5" id='LOGRADOURO'
+																name='ENDERECO.LOGRADOURO' maxlength='40' type='text'
+																size='40' style='margin-right: 2px' /> <input
+																class="col-sm-1" id='NUMERO' name='ENDERECO.NUMERO'
+																maxlength='10' type='text' size='10' /> <span
+																class="col-sm-5"></span><br>
+														</div>
+
+														<div class="form-group">
+															<label>Tipo do complemento</label><br /> <select
+																id='TIPO_DO_COMPLEMENTO_TIPO_DE_COMPLEMENTO'
+																name='ENDERECO.TIPO_DO_COMPLEMENTO_TIPO_DE_COMPLEMENTO'>
+																<option></option>
+															</select>
+														</div>
+														<div class="form-group">
+															<label style='text-transform: capitalize'>complemento</label><br />
+															<input id='COMPLEMENTO' name='ENDERECO.COMPLEMENTO'
+																maxlength='15' type='text' size='15' />
+														</div>
+														<div class="form-group">
+															<label style='text-transform: capitalize'>cep</label> <br />
+															<input id='NUMERO_DO_CEP' name='ENDERECO.NUMERO_DO_CEP'
+																maxlength='10' type='text' size='10' />
+														</div>
+														<div class="form-group">
+															<label style='text-transform: capitalize'>estado</label><br>
+															<input class="col-sm-1" id='UF_CODIGO' name='UF_CODIGO'
+																type='text' size='5' readonly
+																style='background-color: beige; margin-right: 2px' /> <input
+																class="col-sm-3" id='UF_DESCRICAO' name='UF_DESCRICAO'
+																type='text' size='25' readonly
+																style='background-color: beige' /> <a class="col-sm-7"
+																style="cursor: pointer"
+																onclick="javascript:pesquisarLookupEstado('#UF_CODIGO','#UF_DESCRICAO', 'UTIL/UF', 'POPUPPESQUISA', '#popupPesquisaEstado', '#dtGrade_POPUP_PESQUISA_ESTADO');"><i
+																class="fa fa-search"></i></a><br />
+														</div>
+														<div class="form-group">
+															<label style='text-transform: capitalize'>cidade</label><br>
+															<input class="col-sm-1" id='CIDADE_CODIGO'
+																name='CIDADE_CODIGO' type='text' size='5' readonly
+																style='background-color: beige; margin-right: 2px' /> <input
+																class="col-sm-3" id='CIDADE_DESCRICAO'
+																name='CIDADE_DESCRICAO' type='text' size='25' readonly
+																style='background-color: beige' /> <a class="col-sm-7"
+																style="cursor: pointer"
+																onclick="javascript:pesquisarLookupCidade('#CIDADE_CODIGO','#CIDADE_DESCRICAO', 'CIDADE', 'POPUPPESQUISA');"><i
+																class="fa fa-search"></i></a><br />
+														</div>
+														<div class="form-group">
+															<label style='text-transform: capitalize'>bairro</label><br />
+															<input id='BAIRRO' name='ENDERECO.BAIRRO' maxlength='40'
+																type='text' size='40' />
+														</div>
+													</form>
+												</div>
+
+											</div>
+											<div id="ENTIDADE_AGENDA-tab" class="tab-pane fade">
+												<form id='frmENTIDADE_AGENDA'>
+													<div class="form-group">
+														<label style='text-transform: capitalize'>fone 01</label><br />
+														<input id='AGENDA_FONE_01'
+															name='frmENTIDADE_AGENDA.FONE_01' maxlength='12'
+															type='text' size='20' />
+													</div>
+													<div class="form-group">
+														<label style='text-transform: capitalize'>fone 02</label><br />
+														<input id='AGENDA_FONE_02'
+															name='frmENTIDADE_AGENDA.FONE_02' maxlength='12'
+															type='text' size='20' />
+													</div>
+													<div class="form-group">
+														<label style='text-transform: capitalize'>fax</label><br />
+														<input id='AGENDA_FAX' name='frmENTIDADE_AGENDA.FAX'
+															maxlength='12' type='text' size='20' />
+													</div>
+													<div class="form-group">
+														<label style='text-transform: capitalize'>web site</label><br />
+														<input id='AGENDA_WEB_SITE'
+															name='frmENTIDADE_AGENDA.AGENDA_WEB_SITE' maxlength='120'
+															type='text' size='80' />
+													</div>
+												</form>
+											</div>
+											<div id="ENTIDADE_CONTATO-tab" class="tab-pane fade">
+												<form id='frmCONTATO'>
+													<div class="panel-group">
+														<div class="panel panel-default">
+															<div class="panel-heading">
+																<h4 class="panel-title"
+																	style='text-transform: capitalize; font-size: 12px'>
+																	<a data-toggle="collapse"
+																		href="#collapseContatoDiretoria">diretoria</a>
+																</h4>
+															</div>
+															<div id="collapseContatoDiretoria"
+																class="panel-collapse collapse">
+																<div class="panel-body">
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>nome</label><br />
+																		<input id='DIRETORIA_NOME'
+																			name='frmCONTATO.DIRETORIA_NOME' type='text' />
+																	</div>
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>telefone
+																			comercial</label><br /> <input id='DIRETORIA_FONE01'
+																			name='frmCONTATO.DIRETORIA_FONE01' type='text' />
+																	</div>
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>telefone
+																			celular</label><br /> <input id='DIRETORIA_FONE02'
+																			name='frmCONTATO.DIRETORIA_FONE02' type='text' />
+																	</div>
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>email</label><br />
+																		<input id='DIRETORIA_EMAIL'
+																			name='frmCONTATO.DIRETORIA_EMAIL' type='text' />
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="panel panel-default">
+															<div class="panel-heading">
+																<h4 class="panel-title"
+																	style='text-transform: capitalize; font-size: 12px'>
+																	<a data-toggle="collapse" href="#collapseAdmFinanceiro">adm/financeiro</a>
+																</h4>
+															</div>
+															<div id="collapseAdmFinanceiro"
+																class="panel-collapse collapse">
+																<div class="panel-body">
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>nome</label><br />
+																		<input id='ADM_NOME' name='frmCONTATO.ADM_NOME'
+																			type='text' />
+																	</div>
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>telefone
+																			comercial</label><br /> <input id='ADM_FONE01'
+																			name='frmCONTATO.ADM_FONE01' type='text' />
+																	</div>
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>telefone
+																			celular</label><br /> <input id='ADM_FONE02'
+																			name='frmCONTATO.ADM_FONE02' type='text' />
+																	</div>
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>email</label><br />
+																		<input id='ADM_EMAIL' name='frmCONTATO.ADM_EMAIL'
+																			type='text' />
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="panel panel-default">
+															<div class="panel-heading">
+																<h4 class="panel-title"
+																	style='text-transform: capitalize; font-size: 12px'>
+																	<a data-toggle="collapse"
+																		href="#collapseComercialVendas">comercial/vendas</a>
+																</h4>
+															</div>
+															<div id="collapseComercialVendas"
+																class="panel-collapse collapse">
+																<div class="panel-body">
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>nome</label><br />
+																		<input id='COMERCIAL_NOME'
+																			name='frmCONTATO.COMERCIAL_NOME' type='text' />
+																	</div>
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>telefone
+																			comercial</label><br /> <input id='COMERCIAL_FONE01'
+																			name='frmCONTATO.COMERCIAL_FONE01' type='text' />
+																	</div>
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>telefone
+																			celular</label><br /> <input id='COMERCIAL_FONE02'
+																			name='frmCONTATO.COMERCIAL_FONE02' type='text' />
+																	</div>
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>email</label><br />
+																		<input id='COMERCIAL_EMAIL'
+																			name='frmCONTATO.COMERCIAL_EMAIL' type='text' />
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="panel panel-default">
+															<div class="panel-heading">
+																<h4 class="panel-title"
+																	style='text-transform: capitalize; font-size: 12px'>
+																	<a data-toggle="collapse" href="#collapseOPEC">OPEC</a>
+																</h4>
+															</div>
+															<div id="collapseOPEC" class="panel-collapse collapse">
+																<div class="panel-body">
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>nome</label><br />
+																		<input id='OPEC_NOME' name='frmCONTATO.OPEC_NOME'
+																			type='text' />
+																	</div>
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>telefone
+																			comercial</label><br /> <input id='OPEC_FONE01'
+																			name='frmCONTATO.OPEC_FONE01' type='text' />
+																	</div>
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>telefone
+																			celular</label><br /> <input id='OPEC_FONE02'
+																			name='frmCONTATO.OPEC_FONE02' type='text' />
+																	</div>
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>email</label><br />
+																		<input id='OPEC_EMAIL' name='frmCONTATO.OPEC_EMAIL'
+																			type='text' />
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="panel panel-default">
+															<div class="panel-heading">
+																<h4 class="panel-title"
+																	style='text-transform: capitalize; font-size: 12px'>
+																	<a data-toggle="collapse" href="#collapseJornalismo">jornalismo</a>
+																</h4>
+															</div>
+															<div id="collapseJornalismo"
+																class="panel-collapse collapse">
+																<div class="panel-body">
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>nome</label><br />
+																		<input id='JORNALISMO_NOME'
+																			name='frmCONTATO.JORNALISMO_NOME' type='text' />
+																	</div>
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>telefone
+																			comercial</label><br /> <input id='JORNALISMO_FONE01'
+																			name='frmCONTATO.JORNALISMO_FONE01' type='text' />
+																	</div>
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>telefone
+																			celular</label><br /> <input id='JORNALISMO_FONE02'
+																			name='frmCONTATO.JORNALISMO_FONE02' type='text' />
+																	</div>
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>email</label><br />
+																		<input id='JORNALISMO_EMAIL'
+																			name='frmCONTATO.JORNALISMO_EMAIL' type='text' />
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="panel panel-default">
+															<div class="panel-heading">
+																<h4 class="panel-title"
+																	style='text-transform: capitalize; font-size: 12px'>
+																	<a data-toggle="collapse" href="#collapseEsporte">esporte</a>
+																</h4>
+															</div>
+															<div id="collapseEsporte" class="panel-collapse collapse">
+																<div class="panel-body">
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>nome</label><br />
+																		<input id='ESPORTE_NOME'
+																			name='frmCONTATO.ESPORTE_NOME' type='text' />
+																	</div>
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>telefone
+																			comercial</label><br /> <input id='ESPORTE_FONE01'
+																			name='frmCONTATO.ESPORTE_FONE01' type='text' />
+																	</div>
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>telefone
+																			celular</label><br /> <input id='ESPORTE_FONE02'
+																			name='frmCONTATO.ESPORTE_FONE02' type='text' />
+																	</div>
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>email</label><br />
+																		<input id='ESPORTE_EMAIL'
+																			name='frmCONTATO.ESPORTE_EMAIL' type='text' />
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="panel panel-default">
+															<div class="panel-heading">
+																<h4 class="panel-title"
+																	style='text-transform: capitalize; font-size: 12px'>
+																	<a data-toggle="collapse" href="#collapseArtistico">art&iacute;stico</a>
+																</h4>
+															</div>
+															<div id="collapseArtistico"
+																class="panel-collapse collapse">
+																<div class="panel-body">
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>nome</label><br />
+																		<input id='ARTISTICO_NOME'
+																			name='frmCONTATO.ARTISTICO_NOME' type='text' />
+																	</div>
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>telefone
+																			comercial</label><br /> <input id='ARTISTICO_FONE01'
+																			name='frmCONTATO.ARTISTICO_FONE01' type='text' />
+																	</div>
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>telefone
+																			celular</label><br /> <input id='ARTISTICO_FONE02'
+																			name='frmCONTATO.ARTISTICO_FONE02' type='text' />
+																	</div>
+																	<div class="form-group">
+																		<label style='text-transform: capitalize'>email</label><br />
+																		<input id='ARTISTICO_EMAIL'
+																			name='frmCONTATO.ARTISTICO_EMAIL' type='text' />
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</form>
+											</div>
+											<div id="ENTIDADE_DADOS_TECNICOS-tab" class="tab-pane fade">
+												<form id='frmENTIDADE_DADOS_TECNICOS'>
+													<div class="form-group">
+														<label style='text-transform: capitalize'>modula&ccedil;&atilde;o</label><br />
+														<select id='DADOS_TECNICOS_MODULACAO'
+															name='frmENTIDADE_DADOS_TECNICOS.MODULACAO'>
+															<option></option>
+														</select>
+													</div>
+													<div class="form-group">
+														<label style='text-transform: capitalize'>frequ&ecirc;ncia</label><br />
+														<select id='DADOS_TECNICOS_FREQUENCIA'
+															name='frmENTIDADE_DADOS_TECNICOS.FREQUENCIA'>
+															<option></option>
+														</select>
+													</div>
+													<div class="form-group">
+														<label style='text-transform: capitalize'>canal</label><br />
+														<select id='DADOS_TECNICOS_CANAL'
+															name='frmENTIDADE_DADOS_TECNICOS.CANAL'>
+															<option></option>
+														</select>
+													</div>
+													<div class="form-group">
+														<label style='text-transform: capitalize'>utiliza
+															RDS ?</label><br /> <select id='DADOS_TECNICOS_UTILIZA_RDS'
+															name='frmENTIDADE_DADOS_TECNICOS.DADOS_TECNICOS_UTILIZA_RDS'>
+															<option></option>
+														</select>
+													</div>
+													<div class="form-group">
+														<label style='text-transform: capitalize'>pot&ecirc;ncia
+															do transmissor principal (KW)</label><br /> <input
+															id='DADOS_TECNICOS_POTENCIA_TRANSMISSOR_PRINCIPAL'
+															name='frmENTIDADE_DADOS_TECNICOS.DADOS_TECNICOS_POTENCIA_TRANSMISSOR_PRINCIPAL'
+															type='number' />
+													</div>
+													<div class="form-group">
+														<label style='text-transform: capitalize'>pot&ecirc;ncia
+															do transmissor reserva (KW)</label><br /> <input
+															id='DADOS_TECNICOS_POTENCIA_TRANSMISSOR_RESERVA'
+															name='frmENTIDADE_DADOS_TECNICOS.DADOS_TECNICOS_POTENCIA_TRANSMISSOR_RESERVA'
+															type='number' />
+													</div>
+													<div class="form-group">
+														<label style='text-transform: capitalize'>alcance
+															da r&aacute;dio</label><br /> <input class="col-sm-1"
+															id='DADOS_TECNICOS_ALCANCE_RADIO_CIDADE_CODIGO'
+															name='frmENTIDADE_DADOS_TECNICOS.DADOS_TECNICOS_ALCANCE_RADIO_CIDADE_CODIGO'
+															type='text' size='5' readonly
+															style='background-color: beige; margin-right: 2px' /> <input
+															class="col-sm-3"
+															id='DADOS_TECNICOS_ALCANCE_RADIO_CIDADE_DESCRICAO'
+															name='frmENTIDADE_DADOS_TECNICOS.DADOS_TECNICOS_ALCANCE_RADIO_CIDADE_DESCRICAO'
+															type='text' size='25' readonly
+															style='background-color: beige' /> <a class="col-sm-7"
+															style="cursor: pointer"
+															onclick="javascript:CarregarLookup('#popupPesquisa','#dtGrade_POPUP_PESQUISA', '#REMETENTE_AGENDA','#REMETENTE_AGENDA_DESCRICAO', 'ENTIDADE', $('#REMETENTE').val() + '/GETAGENDASPORTIPO/6804', [ 'ID__CHAVE_SEQUENCIAL', 'NUMERO_OU_CONTA' ]);"><i
+															class="fa fa-search"></i></a> <br />
+													</div>
+												</form>
+											</div>
+											<div id="ENTIDADE_COMERCIAL-tab" class="tab-pane fade">
+												<form id='frmCOMERCIAL'>
+													<div class="form-group">
+														<label style='text-transform: capitalize'>Valor
+															Inser&ccedil;&atilde;o 5 Segundos -
+															Rotativo/Indeterminado (R$)</label><br /> <input
+															id='COMERCIAL_05_SEGUNDOS'
+															name='frmCOMERCIAL.COMERCIAL_05_SEGUNDOS' type='number' />
+													</div>
+													<div class="form-group">
+														<label style='text-transform: capitalize'>Valor
+															Inser&ccedil;&atilde;o 10 Segundos -
+															Rotativo/Indeterminado (R$)</label><br /> <input
+															id='COMERCIAL_10_SEGUNDOS'
+															name='frmCOMERCIAL.COMERCIAL_10_SEGUNDOS' type='number' />
+													</div>
+													<div class="form-group">
+														<label style='text-transform: capitalize'>Valor
+															Inser&ccedil;&atilde;o 15 Segundos -
+															Rotativo/Indeterminado (R$)</label><br /> <input
+															id='COMERCIAL_15_SEGUNDOS'
+															name='frmCOMERCIAL.COMERCIAL_15_SEGUNDOS' type='number' />
+													</div>
+													<div class="form-group">
+														<label style='text-transform: capitalize'>Valor
+															Inser&ccedil;&atilde;o 30 Segundos -
+															Rotativo/Indeterminado (R$)</label><br /> <input
+															id='COMERCIAL_30_SEGUNDOS'
+															name='frmCOMERCIAL.COMERCIAL_30_SEGUNDOS' type='number' />
+													</div>
+													<div class="form-group">
+														<label style='text-transform: capitalize'>Valor
+															Inser&ccedil;&atilde;o 45 Segundos -
+															Rotativo/Indeterminado (R$)</label><br /> <input
+															id='COMERCIAL_45_SEGUNDOS'
+															name='frmCOMERCIAL.COMERCIAL_45_SEGUNDOS' type='number' />
+													</div>
+													<div class="form-group">
+														<label style='text-transform: capitalize'>Valor
+															Inser&ccedil;&atilde;o 60 Segundos -
+															Rotativo/Indeterminado (R$)</label><br /> <input
+															id='COMERCIAL_60_SEGUNDOS'
+															name='frmCOMERCIAL.COMERCIAL_60_SEGUNDOS' type='number' />
+													</div>
+												</form>
+											</div>
+											<div id="ENTIDADE_PERFIL-tab" class="tab-pane fade">
+												<form id='frmPERFIL'>
+													<div class="panel-group">
+														<div class="panel panel-default">
+															<div class="panel-heading">
+																<h4 class="panel-title"
+																	style='text-transform: capitalize; font-size: 12px'>
+																	<a data-toggle="collapse" href="#collapsePerfilRadio">r&aacute;dio</a>
+																</h4>
+															</div>
+															<div id="collapsePerfilRadio"
+																class="panel-collapse collapse">
+																<div class="panel-body"
+																	style="text-transform: capitalize">
+																	<div class="form-group">
+																		<label>tipo</label><br /> <select
+																			id='PERFIL_RADIO_TIPO_RADIO'
+																			name='frmPERFIL.PERFIL_RADIO_TIPO_RADIO'>
+																			<option></option>
+																		</select>
+																	</div>
+																	<div class="form-group">
+																		<label>integra rede</label><br /> <select
+																			id='PERFIL_RADIO_INTEGRA_REDE_RADIO'
+																			name='frmPERFIL.PERFIL_RADIO_INTEGRA_REDE_RADIO'>
+																			<option></option>
+																		</select>
+																	</div>
+																	<div class="form-group">
+																		<label>pertence &agrave; um grupo de
+																			comunica&ccedil;&atilde;o</label><br /> <select
+																			id='PERFIL_RADIO_PERTENCE_GRUPO_RADIO'
+																			name='frmPERFIL.PERFIL_RADIO_PERTENCE_GRUPO_RADIO'>
+																			<option></option>
+																		</select>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="panel panel-default">
+															<div class="panel-heading">
+																<h4 class="panel-title"
+																	style='text-transform: capitalize; font-size: 12px'>
+																	<a data-toggle="collapse" href="#collapsePerfilOuvinte">ouvinte</a>
+																</h4>
+															</div>
+															<div id="collapsePerfilOuvinte"
+																class="panel-collapse collapse">
+																<div class="panel-body"
+																	style="text-transform: capitalize">
+																	<div class="form-group">
+																		<label>idade predominante</label><br /> <select
+																			id='OUVINTE_IDADE_PREDOMINANTE'
+																			name='frmPERFIL.OUVINTE_IDADE_PREDOMINANTE'>
+																			<option></option>
+																		</select>
+																	</div>
+																	<div class="form-group">
+																		<label>genero predominante</label><br /> <select
+																			id='OUVINTE_GENERO_PREDOMINANTE'
+																			name='frmPERFIL.OUVINTE_GENERO_PREDOMINANTE'>
+																			<option></option>
+																		</select>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="panel panel-default">
+															<div class="panel-heading">
+																<h4 class="panel-title"
+																	style='text-transform: capitalize; font-size: 12px'>
+																	<a data-toggle="collapse"
+																		href="#collapsePerfilProgramacao">programa&ccedil;&atilde;o</a>
+																</h4>
+															</div>
+															<div id="collapsePerfilProgramacao"
+																class="panel-collapse collapse">
+																<div class="panel-body"
+																	style="text-transform: capitalize">
+																	<div class="form-group">
+																		<label>produ&ccedil;&atilde;o</label><br /> <select
+																			id='PROGRAMACAO_PRODUCAO'
+																			name='frmPERFIL.PROGRAMACAO_PRODUCAO'>
+																			<option></option>
+																		</select>
+																	</div>
+																	<div class="form-group">
+																		<label>base</label><br /> <select
+																			id='PROGRAMACAO_BASE'
+																			name='frmPERFIL.PROGRAMACAO_BASE'>
+																			<option></option>
+																		</select>
+																	</div>
+																	<div class="form-group">
+																		<label>conte&uacute;do</label><br /> <select
+																			id='PROGRAMACAO_CONTEUDO'
+																			name='frmPERFIL.PROGRAMACAO_CONTEUDO'>
+																			<option></option>
+																		</select>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</form>
+											</div>
+											<div id="ENTIDADE_LOGIN-tab" class="tab-pane fade">
+												<form id="frmLOGIN">
+													<div class="form-group">
+														<label style='text-transform: capitalize'>login</label><br />
+														<input id='LOGIN' name='LOGIN.LOGIN' maxlength='40'
+															type='text' size='40' />
+													</div>
+													<div class="form-group">
+														<label style='text-transform: capitalize'>senha</label><br />
+														<input id='SENHA' name='LOGIN.SENHA' maxlength='40'
+															size='40' type="password" />
+													</div>
+													<div class="form-group">
+														<label style='text-transform: capitalize'>confirmação</label><br />
+														<input id='CONFIRMACAO' name='LOGIN.CONFIRMACAO' maxlength='40'
+															size='40' type="password" />
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--END CONTENT-->
+							</div>
+							<div id="GRADE_ENTIDADE-tab" class="tab-pane fade">
+								<table id="dtGrade_ENTIDADE" class="display"
+									style="width: 100%; cursor: pointer">
+									<thead style='font-size: 13px'>
+										<tr>
+											<!--Gerar Colunas da Grade de Pesquisa-->
+											<td style='text-transform: capitalize'>descri&ccedil;&atilde;o</td>
+											<td style='text-transform: capitalize'>raz&atilde;o
+												social</td>
+											<td style='text-transform: capitalize'>nome fantasia</td>
+										</tr>
+									</thead>
+									<tbody style='font-size: 11px'>
+										<!-- Gerar Conteúdo da Grade de Registros -->
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="row"></div>
+					<div class="clearfix"></div>
+				</div>
+				<!--END TITLE & BREADCRUMB PAGE-->
+			</div>
+			<!--END PAGE WRAPPER-->
+		</div>
+	</div>
+	<div id='popupPesquisa' style='width: 400px'>
+		<table id="dtGrade_POPUP_PESQUISA" class="display" style="width: 100%">
+			<thead style='font-size: 13px'>
+				<tr>
+					<!--Gerar Colunas da Grade de Pesquisa-->
+					<td style='text-transform: capitalize'>id</td>
+					<td style='text-transform: capitalize'>descri&ccedil;&atilde;o</td>
+					<td style='text-transform: capitalize'>pa&iacute;s</td>
+					<td style='text-transform: capitalize'>estado</td>
+					<td style='text-transform: capitalize'>sigla uf</td>
+				</tr>
+			</thead>
+			<tbody style='font-size: 11px'>
+				<!-- Gerar Conteúdo da Grade de Registros -->
+			</tbody>
+		</table>
+	</div>
+	<div id='popupPesquisaEstado' style='width: 400px'>
+		<table id="dtGrade_POPUP_PESQUISA_ESTADO" class="display"
+			style="width: 100%">
+			<thead style='font-size: 13px'>
+				<tr>
+					<!--Gerar Colunas da Grade de Pesquisa-->
+					<td style='text-transform: capitalize'>id</td>
+					<td style='text-transform: capitalize'>estado</td>
+					<td style='text-transform: capitalize'>sigla uf</td>
+				</tr>
+			</thead>
+			<tbody style='font-size: 11px'>
+				<!-- Gerar Conteúdo da Grade de Registros -->
+			</tbody>
+		</table>
+	</div>
+	<script src="script/jquery-migrate-1.2.1.min.js"></script>
+	<script src="script/jquery-ui.js"></script>
+	<script src="script/bootstrap.min.js"></script>
+	<script src="script/bootstrap-hover-dropdown.js"></script>
+	<script src="script/html5shiv.js"></script>
+	<script src="script/respond.min.js"></script>
+	<script src="script/jquery.metisMenu.js"></script>
+	<script src="script/jquery.slimscroll.js"></script>
+	<script src="script/jquery.cookie.js"></script>
+	<script src="script/icheck.min.js"></script>
+	<script src="script/custom.min.js"></script>
+	<script src="script/jquery.news-ticker.js"></script>
+	<script src="script/jquery.menu.js"></script>
+	<script src="script/pace.min.js"></script>
+	<script src="script/holder.js"></script>
+	<script src="script/responsive-tabs.js"></script>
+	<script src="script/jquery.flot.js"></script>
+	<script src="script/jquery.flot.categories.js"></script>
+	<script src="script/jquery.flot.pie.js"></script>
+	<script src="script/jquery.flot.tooltip.js"></script>
+	<script src="script/jquery.flot.resize.js"></script>
+	<script src="script/jquery.flot.fillbetween.js"></script>
+	<script src="script/jquery.flot.stack.js"></script>
+	<script src="script/jquery.flot.spline.js"></script>
+	<script src="script/zabuto_calendar.min.js"></script>
+	<script src="script/index.js"></script>
+	<!--CORE JAVASCRIPT-->
+	<script src="script/main.js"></script>
+</body>
+</html>

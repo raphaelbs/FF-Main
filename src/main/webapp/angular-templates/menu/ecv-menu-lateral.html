@@ -1,0 +1,62 @@
+<div layout="column" layout-fill layout-warp>	
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h1 class="md-toolbar-tools">ECV - FINANCEIRO</h1>
+				<span flex ng-if="!menu.html.fixado"></span>
+				<md-button 
+					ng-click="menu.fn.close()"
+		            class="md-icon-button" 
+		            ng-if="!menu.html.fixado"
+		            aria-label="Fechar menu">
+		            <i class="fa fa-times" aria-hidden="true"></i>
+		        </md-button>
+			</div>
+		</md-toolbar>
+		
+		<md-content flex="85" layout="column">
+			<md-progress-linear 
+				flex
+				ng-if="!menuCarregado" 
+				md-mode="indeterminate"
+				class="md-accent">
+			</md-progress-linear>
+			
+			<md-content flex layout layout-align="center center"
+				    	ng-if="erroAoCarregar">
+		    	<div flex layout="column" layout-align="center center">
+			    	<i flex class="fa fa-exclamation-circle md-primary" style="font-size:5em;"></i>
+			    	<span flex>Erro ao carregar o menu :(</span>
+		    	</div>
+		    </md-content>
+			
+			<md-list ng-if="menuCarregado && !erroAoCarregar" flex>
+				<ecv-menu-item 
+					ng-repeat="item in items track by item.c1_9802"
+					debug="debug"
+					item="item"
+					pai="true">
+				</ecv-menu-item>
+			</md-list>
+		</md-content>
+				
+		<md-content flex="15" layout layout-align="space-around center" md-whiteframe="2">
+			<md-button
+				aria-label="perfil"
+				class="md-fab md-mini md-primary">
+				<md-icon><i class="material-icons">person</i></md-icon>
+			</md-button>
+			<md-button 
+				aria-label="idioma" 
+				class="md-fab md-mini md-primary"
+				ui-sref="configuracoes">
+            	<md-icon><span class="flag-icon flag-icon-squared" ng-class="bandeira"></span></md-icon>
+        	</md-button>
+			<md-button
+				aria-label="configuracoes"
+				class="md-fab md-mini md-primary"
+				ui-sref="configuracoes">
+				<md-icon><i class="material-icons">settings</i></md-icon>
+			</md-button>
+		</md-content>
+	</md-sidenav>
+</div>

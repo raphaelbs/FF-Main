@@ -1,0 +1,32 @@
+<md-dialog aria-label="Buscar {{componente.alias}}">
+	<md-toolbar class="md-primary">
+		<div class="md-toolbar-tools">
+			<h2 ng-bind="componente.alias"></h2>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click="fn.close()">
+				<i class="fa fa-times"></i>
+				<md-tooltip>Fechar</md-tooltip>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<md-dialog-content layout="column" layout-margin layout-align="center center">
+		<md-autocomplete 
+			flex
+			ng-disabled="componente.habilitado===false"
+			md-selected-item="componente.modelo[componente.ultimaReferencia]"
+			md-selected-item-change="componente.modelo[componente.ultimaReferencia] && fn.close()"
+			md-search-text="componente.detalhamento.textoDigitado"
+			md-items="item in querySearch(componente, componente.detalhamento.textoDigitado)"
+			md-item-text="item[componente.detalhamento.descricao]" 
+			placeholder="{{componente.alias}}"
+			md-autofocus>
+			
+			<md-item-template>
+				<span 
+					md-highlight-text="componente.detalhamento.textoDigitado" 
+					md-highlight-flags="^i">
+					{{item[componente.detalhamento.descricao]}}</span>
+			</md-item-template> 
+		</md-autocomplete>
+	</md-dialog-content>
+</md-dialog>

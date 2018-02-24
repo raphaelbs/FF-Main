@@ -1,0 +1,211 @@
+<form role="form" 
+	name="masterForm" 
+	layout="column"
+	ng-submit="validar(masterForm)">
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<md-button 
+				ng-click="toggleMenu()"
+	            class="md-icon-button" 
+	            aria-label="Menu">
+	            <i class="fa fa-bars" aria-hidden="true"></i>
+	        </md-button>
+	        
+			<!-- NOME DO FORMULARIO -->
+			<h2 class="md-flex" ng-bind="data.nome"></h2>
+			<span flex></span>
+			
+			<!-- AÇÕES DE CRUD -->
+			<div ng-repeat="itemCrud in data.crud track by $index" flex-order="{{itemCrud.ordem}}">
+				<!-- SWITCH: DEBUG -->
+				<div ng-if="itemCrud.valor === 'debug' && (itemCrud.visivel===undefined || itemCrud.visivel)" layout layout-margin>
+					<i ng-if="itemCrud.icone.substr(0, 3) === 'fa '" class="{{itemCrud.icone}}" flex></i>
+					<i ng-if="itemCrud.icone.substr(0, 3) !== 'fa '" class="material-icons" flex>{{itemCrud.icone}}</i>
+					<md-switch ng-model="data.debug" aria-label="Debug" flex></md-switch>
+					<md-tooltip>
+		        		<span ng-bind="itemCrud.descricao"></span>
+		        	</md-tooltip>
+				</div>
+				
+				
+				<!-- BOTOES DE CRUD -->
+				<md-button 	
+					class="md-icon-button"
+					type="{{(itemCrud.alias==='GRAVAR') ? 'submit' : 'button'}}"
+					aria-label="{{itemCrud.alias}}" 
+					ng-click="itemCrud.alias!=='GRAVAR' && acaoCrud(itemCrud)"
+					ng-if="itemCrud.valor !== 'debug' && itemCrud.valor !== 'espaco' && (itemCrud.visivel===undefined || itemCrud.visivel)"
+					ng-disabled="itemCrud.habilitado===false || itemCrud.carregando">
+					<i ng-if="!itemCrud.carregando && itemCrud.icone.substr(0, 3) === 'fa '" class="{{itemCrud.icone}}"></i>
+					<i ng-if="!itemCrud.carregando && itemCrud.icone.substr(0, 3) !== 'fa '" class="material-icons">{{itemCrud.icone}}</i>
+		        	<i ng-if="!itemCrud.carregando && itemCrud.habilitado===false" 
+		        		style="color: red;"
+		        		class="fa fa-ban fa-stack-2x text-danger"></i>
+		        	<md-progress-circular ng-show="itemCrud.carregando" class="md-accent" md-diameter="20"></md-progress-circular>
+		        	<md-tooltip>
+		        		<span ng-bind="itemCrud.descricao"></span>
+		        	</md-tooltip>
+		        </md-button>
+			</div>
+		</div>
+	</md-toolbar>
+	<md-content flex>
+		<!-- TELAS DO FORMULÁRIO -->
+		<md-tabs md-dynamic-height md-border-bottom md-selected="data.telas.selecionada">
+			<md-tab 
+				label="{{tela.nome}}" 
+				ng-repeat="tela in data.telas track by tela.id">
+				
+				<!-- TELA TP_TELA_FORMULARIO -->
+				<div layout="column" layout-margin>
+					<!-- AÇÕES DE CRUD -->
+					<div layout layout-align="end center">
+						<div ng-repeat="itemCrud in data.crud track by $index" flex-order="{{itemCrud.ordem}}" ng-if="tela.tipo === 'TELA DE CADASTRO'">
+							<!-- SWITCH: DEBUG -->
+							<div ng-if="itemCrud.valor === 'debug' && (itemCrud.visivel===undefined || itemCrud.visivel)" layout layout-margin>
+								<i ng-if="itemCrud.icone.substr(0, 3) === 'fa '" class="{{itemCrud.icone}}" flex></i>
+								<i ng-if="itemCrud.icone.substr(0, 3) !== 'fa '" class="material-icons" flex>{{itemCrud.icone}}</i>
+								<md-switch ng-model="data.debug" aria-label="Debug" flex></md-switch>
+								<md-tooltip>
+					        		<span ng-bind="itemCrud.descricao"></span>
+					        	</md-tooltip>
+							</div>
+							
+							
+							<!-- BOTOES DE CRUD -->
+							<md-button 	
+								class="md-icon-button"
+								type="{{(itemCrud.alias==='GRAVAR') ? 'submit' : 'button'}}"
+								aria-label="{{itemCrud.alias}}" 
+								ng-click="itemCrud.alias!=='GRAVAR' && acaoCrud(itemCrud)"
+								ng-if="itemCrud.valor !== 'debug' && itemCrud.valor !== 'espaco' && (itemCrud.visivel===undefined || itemCrud.visivel)"
+								ng-disabled="itemCrud.habilitado===false || itemCrud.carregando"
+								md-colors="{color: 'primary'}">
+								<i ng-if="!itemCrud.carregando && itemCrud.icone.substr(0, 3) === 'fa '" class="{{itemCrud.icone}}"></i>
+								<i ng-if="!itemCrud.carregando && itemCrud.icone.substr(0, 3) !== 'fa '" class="material-icons">{{itemCrud.icone}}</i>
+					        	<i ng-if="!itemCrud.carregando && itemCrud.habilitado===false" 
+					        		style="color: red;"
+					        		class="fa fa-ban fa-stack-2x text-danger"></i>
+					        	<md-progress-circular ng-show="itemCrud.carregando" class="md-accent" md-diameter="20"></md-progress-circular>
+					        	<md-tooltip>
+					        		<span ng-bind="itemCrud.descricao"></span>
+					        	</md-tooltip>
+					        </md-button>
+						</div>
+					</div>
+				
+				
+					<div md-whiteframe="3" ng-repeat="container in tela.containers track by $index">
+						
+						<!-- ABAS NOS CONTAINERS -->
+						<md-tabs md-selected="container['selecionado']">
+						
+							<!-- INICIO = GUIA TIPO: DETAIL - COLAPSE INCREMENTAL -->
+							<md-tab  
+								ng-if="guia.tipo === 'DETAIL - COLAPSE INCREMENTAL'"
+								class="md-accent md-hue-2"
+								ng-repeat="guia in container track by $index">
+								<md-tab-label layout layout-align="center center">
+									<span>{{guia.nome}}</span>
+									<md-tooltip ng-if="data.debug">Index: {{$index}}, Id: {{guia.id}}, Tipo: {{guia.tipo}}{{guia.mapeamento ? ', Mapeamento: ' + guia.mapeamento : ''}}</md-tooltip>
+								</md-tab-label>
+								<md-tab-body>
+									<md-content layout="column" layout-margin>
+										<md-button 
+											class="md-fab" aria-label="Novo" 
+											ng-click="inserirColapse(guia.colapses, guia.modelo, guia, tela, container)">
+								        	<md-icon class="material-icons">add</md-icon>
+								        	<md-tooltip>Novo</md-tooltip>
+								        </md-button>
+										<md-content ng-repeat="colapse in guia.colapses track by $index" 
+											md-whiteframe="2" flex class="ecv-fade-0.5s">
+											<md-toolbar class="md-hue-3">
+										    	<div class="md-toolbar-tools">
+										    		<md-button 
+										    			md-no-ink class="md-icon-button" aria-label="Navegação" 
+										    			ng-click="colapse.expandido = !colapse.expandido">
+														<md-icon class="material-icons" ng-if="!colapse.expandido">keyboard_arrow_right</md-icon>
+			  											<md-icon class="material-icons" ng-if="colapse.expandido">keyboard_arrow_down</md-icon>
+											        </md-button>
+											        <h2>
+											        	<span>{{colapse.nome}}</span>
+											        </h2>
+										        	<span flex></span>
+											        <md-button md-no-ink class="md-icon-button" aria-label="Cópia"
+											        	ng-click="inserirColapse(guia.colapses, guia.colapses[$index], guia, tela, container)">
+											        	<md-icon class="material-icons">content_copy</md-icon>
+											        	<md-tooltip>Duplicar</md-tooltip>
+											        </md-button>
+											        <md-button md-no-ink class="md-icon-button" aria-label="Deletar"
+											        	ng-click="guia.colapses.splice($index, 1)">
+											        	<md-icon class="material-icons">delete</md-icon>
+											        	<md-tooltip>Deletar</md-tooltip>
+											        </md-button>
+											     </div>
+										    </md-toolbar>
+											<ecv-inputs 
+												ng-if="colapse.expandido"
+												componentes="guia.componentes" 
+												data="data"
+												debug="data.debug">
+											</ecv-inputs>
+										</md-content>
+									</md-content>
+								</md-tab-body>
+							</md-tab>
+							<!-- FINAL = GUIA TIPO: DETAIL - COLAPSE INCREMENTAL -->
+						
+						
+						
+						
+							<!-- INICIO = GUIA TIPO: DETAIL - SIMPLES INCREMENTAL -->
+							<md-tab  
+								ng-if="container.length>0 && container[0].tipo !== 'DETAIL - COLAPSE INCREMENTAL'"
+								md-on-select="atualizarGuiasDetalhes($index, container, tela)"
+								class="md-accent md-hue-2"
+								ng-repeat="guia in container track by $index">
+								<md-tab-label layout layout-align="center center">
+									<span>{{guia.nome}}</span>
+									<span>&nbsp;&nbsp;
+										<i class="fa fa-times" 
+											ng-click="deletarGuia($index, container, tela)"
+											ng-if="$index>0 && container[0].tipo === 'DETAIL - SIMPLES INCREMENTAL'"></i>
+									</span>
+									<md-tooltip ng-if="data.debug">Index: {{$index}}, Id: {{guia.id}}, Tipo: {{guia.tipo}}{{guia.mapeamento ? ', Mapeamento: ' + guia.mapeamento : ''}}</md-tooltip>
+								</md-tab-label>
+								<md-tab-body>
+									<ecv-inputs 
+										componentes="guia.componentes" 
+										data="data"
+										debug="data.debug"></ecv-inputs>
+								</md-tab-body>
+							</md-tab>
+							<md-tab 
+								md-on-select="novaGuia(container, tela)"
+								ng-if="container.length>0 && container[0].tipo === 'DETAIL - SIMPLES INCREMENTAL'">
+								<md-tab-label><i class="material-icons">add</i></md-tab-label>
+							</md-tab>
+							<!-- FIM = GUIA TIPO: DETAIL - SIMPLES INCREMENTAL -->
+						</md-tabs>
+					</div>
+				</div>
+				
+			</md-tab>
+			<md-tab label="DEBUG" ng-if="data.debug">
+				<div layout="column" layout-margin>
+					<div md-whiteframe="3">
+						<md-tabs md-dynamic-height>
+							<md-tab label="Modelo">
+								<pre>{{data.model | json}}</pre>
+							</md-tab>
+							<!-- 
+							<md-tab label="Data">
+								<pre>{{data | json}}</pre>
+							</md-tab> -->
+						</md-tabs>
+					</div>
+				</div>
+			</md-tab>
+		</md-tabs>
+	</md-content>
+</form>

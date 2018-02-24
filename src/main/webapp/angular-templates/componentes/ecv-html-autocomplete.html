@@ -1,0 +1,21 @@
+<div layout="row" layout-align="space-around center">
+	<md-input-container flex="95" ng-click="modalMdAutocomplete($event)"> 
+	<!-- Placeholder -->
+		<label 
+			ng-bind="alias"></label> 
+		<!-- Input -->
+		<input 
+			ng-model="modelo[inputAlias]"
+			name="{{referencia}}"
+			ng-disabled="true" 
+			ng-required="obrigatorio"
+			 />
+	</md-input-container>
+	<md-button
+		tabindex="-1"
+		class="md-icon-button" 
+		ng-click="modalMdAutocomplete($event)" 
+		aria-label="{{alias}}">
+		<i class="fa fa-search" aria-hidden="true"></i>				
+	</md-button>
+</div>

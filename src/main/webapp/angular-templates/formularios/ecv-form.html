@@ -1,0 +1,51 @@
+<!-- Carregando formulário... -->
+<md-content layout layout-fill layout-align="center center"
+	ng-if="carregando" ng-cloak>
+	<div flex layout="column" layout-align="space-around center">
+		<br/>
+		<md-progress-circular 
+			class="md-accent"
+			md-mode="indeterminate">
+		</md-progress-circular>
+   		<h4 ng-bind="carregando"></h4>
+	</div>
+</md-content>
+   
+<!-- Erros -->
+<md-content layout layout-fill layout-align="center center"
+   	ng-if="carregarError || naoEncontrado" ng-cloak>
+   	<div flex layout="column" layout-margin layout-align="center center">
+    	<i class="fa fa-exclamation-circle md-primary" style="font-size:5em;"></i>
+    	<span ng-if="error.e500">Erro ao carregar formulário:<br><span ng-bind="error.e500"></span></span>
+    	<span ng-if="error.e400">Parâmetros incorretos!<br><span ng-bind="error.e400"></span></span>
+    	<span ng-if="error.e404">Formulário não encontrado!</span>
+   	</div>
+</md-content>
+
+<md-content layout="column" layout-fill ng-cloak
+	ng-switch="formData.tipo"
+	ng-if="!carregando && !carregarError && !naoEncontrado">	
+					    
+	<!-- Formulário master/detail -->
+	<ecv-form-master-detail
+		ng-switch-when="MASTER / DETAIL"
+		data="formData"
+		ng-if="!carregando">
+	</ecv-form-master-detail>
+	
+	
+	<!-- Formulário master/single detail -->
+	<ecv-form-master-single-detail
+		ng-switch-when="MASTER / SINGLE DETAIL"
+		data="formData"
+		ng-if="!carregando">
+	</ecv-form-master-single-detail>
+	
+	
+	<!-- Formulário single detail -->
+	<ecv-form-single-detail
+		ng-switch-when="SINGLE DETAIL"
+		data="formData"
+		ng-if="!carregando">
+	</ecv-form-single-detail>
+</md-content>

@@ -1,0 +1,16 @@
+<div>
+	<md-toolbar class="md-primary md-hue-3">
+		<div class="md-toolbar-tools">
+			<h3 class="topico" flex="100" layout layout-align="none center">
+				<i class="material-icons">keyboard_arrow_right</i>&nbsp;
+				<ng-transclude ng-transclude-slot="titulo"></ng-transclude>
+			</h3>
+			<span flex></span>
+			<div ng-transclude="botoes"></div>
+		</div>
+	</md-toolbar>
+	
+	<md-content layout="column" layout-margin layout-padding>
+		<ng-transclude ng-transclude-slot="conteudo"></ng-transclude>
+	</md-content>
+</div>

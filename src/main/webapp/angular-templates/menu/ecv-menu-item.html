@@ -1,0 +1,40 @@
+<md-content layout="column" ng-show="pai">
+	<md-list-item
+		aria-label="{{item.c3_9802}}"
+		ng-if="item.c4_9802_5002.c4_5002 === 'MENU'" 
+		ng-click="item.clicou = !item.clicou"
+		ui-sref="{{item.c6_9802 || '#'}}"
+		ng-init="item.clicou = false"
+		md-colors="{background: ($state.includes(item.c6_9802) ? cores.menu.fundoA : cores.menu.fundo), 
+			color: ($state.includes(item.c6_9802) ? cores.menu.corA : cores.menu.cor)}">
+		<i class="material-icons" ng-if="item.t9802C5 && item.t9802C5.length>0 && !item.clicou">keyboard_arrow_right</i>
+	  	<i class="material-icons" ng-if="item.t9802C5 && item.t9802C5.length>0 && item.clicou">keyboard_arrow_down</i>
+		<span ng-bind="item.c3_9802"></span>
+	  	<md-tooltip ng-if="debug"><span ng-bind="'Id: ' + item.c1_9802"></span></md-tooltip>
+	</md-list-item>
+	
+	<ecv-menu-item
+		class="ecv-slidedown"
+		ng-repeat="subitens in item.t9802C5 track by subitens.c1_9802"
+		debug="debug"
+		item="subitens"
+		pai="item.clicou">
+	</ecv-menu-item>
+	
+	<md-divider
+		ng-if="item.c4_9802_5002.c4_5002 === 'SEPARADOR'" >
+		<md-tooltip ng-if="debug"><span ng-bind="'Id: ' + item.c1_9802"></span></md-tooltip>
+	</md-divider>
+	
+	<md-list-item
+		class="ecv-slidedown"
+		md-colors="{background: ($state.includes(item.c6_9802) ? cores.form.fundoA : cores.form.fundo), 
+			color: ($state.includes(item.c6_9802) ? cores.form.corA : cores.form.cor)}"
+		aria-label="{{item.c3_9802}}"
+		ng-if="item.c4_9802_5002.c4_5002 === 'FORM'" 
+		ui-sref="{{item.c6_9802 || 'principal'}}"
+		ng-show="pai">
+	   	<!-- <md-icon class="md-avatar"><i class="fa fa-university" aria-hidden="true"></i></md-icon> -->
+	   	<span ng-bind="item.c3_9802"></span>
+	</md-list-item>
+</md-content>

@@ -1,0 +1,205 @@
+<div layout layout-wrap layout-margin layout-align="start">
+	<div 
+		ng-repeat="componente in componentes track by componente.id"
+		ng-if="componente.visivel===undefined || componente.visivel"
+		flex="{{componente.posicao['POSIÇÃO - PADRAO'] || 100}}" flex-order="{{componente.ordem['ORDEM - PADRAO']}}" 								flex-offset="{{componente.offset['OFFSET - PADRAO']}}"
+		flex-xs="{{componente.posicao['POSIÇÃO - XS']}}" 		flex-order-xs="{{componente.ordem['ORDEM - XS'] || componente.ordem['ORDEM - PADRAO']}}" 		flex-offset-xs="{{componente.offset['OFFSET - XS']}}"
+		flex-gt-xs="{{componente.posicao['POSIÇÃO - GTXS']}}" 	flex-order-gt-xs="{{componente.ordem['ORDEM - GTXS'] || componente.ordem['ORDEM - PADRAO']}}" flex-offset-gt-xs="{{componente.offset['OFFSET - GTXS']}}"
+		flex-sm="{{componente.posicao['POSIÇÃO - SM']}}" 		flex-order-sm="{{componente.ordem['ORDEM - SM'] || componente.ordem['ORDEM - PADRAO']}}" 		flex-offset-sm="{{componente.offset['OFFSET - SM']}}"
+		flex-gt-sm="{{componente.posicao['POSIÇÃO - GTSM']}}" 	flex-order-gt-sm="{{componente.ordem['ORDEM - GTSM'] || componente.ordem['ORDEM - PADRAO']}}" flex-offset-gt-sm="{{componente.offset['OFFSET - GTSM']}}"
+		flex-md="{{componente.posicao['POSIÇÃO - MD']}}" 		flex-order-md="{{componente.ordem['ORDEM - MD'] || componente.ordem['ORDEM - PADRAO']}}" 		flex-offset-md="{{componente.offset['OFFSET - MD']}}"
+		flex-gt-md="{{componente.posicao['POSIÇÃO - GTMD']}}" 	flex-order-gt-md="{{componente.ordem['ORDEM - GTMD'] || componente.ordem['ORDEM - PADRAO']}}" flex-offset-gt-md="{{componente.offset['OFFSET - GTMD']}}"
+		flex-lg="{{componente.posicao['POSIÇÃO - LG']}}" 		flex-order-lg="{{componente.ordem['ORDEM - LG'] || componente.ordem['ORDEM - PADRAO']}}" 		flex-offset-lg="{{componente.offset['OFFSET - LG']}}"
+		flex-gt-lg="{{componente.posicao['POSIÇÃO - GTLG']}}" 	flex-order-gt-lg="{{componente.ordem['ORDEM - GTLG'] || componente.ordem['ORDEM - PADRAO']}}" flex-offset-gt-lg="{{componente.offset['OFFSET - GTLG']}}"
+		flex-xl="{{componente.posicao['POSIÇÃO - XL']}}" 		flex-order-xl="{{componente.ordem['ORDEM - XL'] || componente.ordem['ORDEM - PADRAO']}}" 		flex-offset-xl="{{componente.offset['OFFSET - XL']}}"
+		layout layout-align="center start">
+								
+		<!-- Componente: Imagem -->
+		<div 
+			ng-if="componente.detalhamento && ehTipo('imagem', componente)"
+			ng-style="{'width': componente.detalhamento.largura, 'height': componente.detalhamento.altura}" 
+			flex="initial">
+			<ecv-imagem 
+				componente="componente" 
+				componentes="componentes">
+			</ecv-imagem>
+		</div>
+		<!-- ALARME DE ERRO -->
+		<div ng-if="ehTipo('imagem', componente)">
+			<span ng-if="!componente.detalhamento.imagemPadrao">
+				Erro no componente imagem (id {{componente.id}}): faltando detalhamento "imagemPadrao".</span>
+			<span ng-if="!componente.detalhamento.largura">
+				Erro no componente imagem (id {{componente.id}}): faltando detalhamento "largura".</span>
+			<span ng-if="!componente.detalhamento.altura">
+				Erro no componente imagem (id {{componente.id}}): faltando detalhamento "altura".</span>
+		</div>
+														
+		<!-- Icone e descrição -->
+		<md-icon ng-if="componente.icone || componente.descricao && componente.tipo !== 'imagem'" flex="{{tamanhoFlex()}}">
+			<i class="{{!componente.icone && componente.descricao && 'fa fa-info'}}"></i>
+			<i ng-if="componente.icone.substr(0, 3) === 'fa '" class="{{componente.icone}}"></i>
+			<i ng-if="componente.icone.substr(0, 3) !== 'fa '" class="material-icons">{{componente.icone}}</i>
+			<md-tooltip><span ng-bind="componente.descricao"></span></md-tooltip>
+		</md-icon>
+		
+		<!-- Componente: text, number, password -->
+		<md-input-container ng-if="ehTipo('input', componente)" flex="{{tamanhoFlex(componente) - 5}}"> 
+			<!-- Placeholder -->
+			<label 
+				ng-bind="componente.alias"></label> 
+			<!-- Input -->
+			<input 
+				ng-model="componente.modelo[componente.ultimaReferencia]"
+				name="{{componente.referencia}}"
+				ng-disabled="componente.habilitado===false" 
+				type="{{componente.tipo}}"
+				ng-pattern="componente.validacao.pattern.valor"
+				ng-required="componente.validacao.required.valor"
+				minlength="{{componente.validacao.minlength.valor}}" 
+				maxlength="{{componente.validacao.maxlength.valor}}" />
+			<!-- Validações --> 
+			<div 
+				ng-messages="masterForm[componente.referencia].$error" 
+				md-auto-hide="false" 
+				role="alert">
+				<div 
+					ng-repeat="(validacao, opcoes) in componente.validacao" 
+					ng-message="{{validacao}}" ng-bind="opcoes.erro"></div>
+		 	</div>
+		</md-input-container>
+		<!-- Lixeirinha -->
+		<div flex="5" ng-if="ehTipo('input', componente) && componente.habilitado">
+			<md-button
+				tabindex="-1"
+				class="md-icon-button"
+				aria-label="limpar {{componente.alias}}" 
+				ng-click="componente.modelo[componente.ultimaReferencia]=undefined">
+	        	<i class="fa fa-times" aria-hidden="true"></i>
+	        </md-button>
+        </div>
+		
+		<!-- Componente: autocomplete Ajax -->
+		<div 
+			ng-if="componente.detalhamento && ehTipo('autocomplete-ajax', componente)" 
+			flex="{{tamanhoFlex(componente)}}">
+
+			<ecv-autocomplete componente="componente"></ecv-autocomplete>
+		</div>
+		<!-- ALARME DE ERRO -->
+		<div ng-if="ehTipo('autocomplete-ajax', componente)">
+			<span ng-if="!componente.detalhamento.opcoes">
+				Erro no componente autocomplete (id {{componente.id}}): faltando detalhamento "opcoes".</span>
+			<span ng-if="!componente.detalhamento.descricao">
+				Erro no componente autocomplete (id {{componente.id}}): faltando detalhamento "descricao".</span>
+		</div>
+		
+		<!-- Componente: Combobox Array -->
+		<div 
+			ng-if="componente.detalhamento && ehTipo('select-array', componente)" 
+			flex="{{tamanhoFlex(componente)}}">
+			<md-input-container class="md-block">
+	            <label ng-bind="componente.alias"></label>
+				<md-select 
+					name="{{componente.referencia}}"
+					ng-disabled="componente.habilitado===false"
+					ng-model="componente.modelo[componente.ultimaReferencia]"
+					ng-required="componente.validacao.required.valor">
+			        <md-option ng-value="opcao" ng-repeat="opcao in componente.detalhamento.opcoes">
+			        {{ opcao[componente.detalhamento.descricao] }}</md-option>
+				</md-select>
+			</md-input-container>
+		</div>
+		<!-- ALARME DE ERRO -->
+		<div ng-if="ehTipo('select-array', componente)">
+			<span ng-if="!componente.detalhamento.opcoes">
+				Erro no componente combo box (id {{componente.id}}): faltando detalhamento "opcoes".</span>
+			<span ng-if="!componente.detalhamento.descricao">
+				Erro no componente combo box (id {{componente.id}}): faltando detalhamento "descricao".</span>
+		</div>
+				
+		<!-- Componente: Combobox Ajax -->
+		<div 
+			ng-if="componente.detalhamento && ehTipo('select-ajax', componente)" 
+			flex="{{tamanhoFlex(componente)}}">
+			<md-input-container class="md-block">
+	            <label ng-bind="componente.alias"></label>
+				<md-select 
+					aria-label="{{componente.alias}}"
+					placeholder="{{componente.alias}}" 
+					md-on-open="carregaSelectAsync(componente)"
+					name="{{componente.referencia}}"
+					ng-disabled="componente.habilitado===false"
+					ng-model="componente.modelo[componente.ultimaReferencia]"
+					ng-required="componente.validacao.required.valor">
+			        <md-option ng-value="opcao" ng-repeat="opcao in componente.detalhamento.opcoesCarregadas">
+			        	{{ opcao[componente.detalhamento.descricao] }}</md-option>
+				</md-select>
+			</md-input-container>
+		</div>
+		<!-- ALARME DE ERRO -->
+		<div ng-if="ehTipo('select-ajax', componente)">
+			<span ng-if="!componente.detalhamento.opcoes">
+				Erro no componente combo box (id {{componente.id}}): faltando detalhamento "opcoes".</span>
+			<span ng-if="!componente.detalhamento.descricao">
+				Erro no componente combo box (id {{componente.id}}): faltando detalhamento "descricao".</span>
+		</div>
+		
+		<!-- Componente: Checkbox -->
+		<div 
+			ng-if="ehTipo('checkbox', componente)" 
+			flex="{{tamanhoFlex(componente)}}">
+			<md-checkbox 
+				name="{{componente.referencia}}"
+				ng-model="componente.modelo[componente.ultimaReferencia]"
+				aria-label="{{componente.descricao || componente.alias}}"
+				ng-required="componente.validacao.required.valor"
+				ng-disabled="componente.habilitado===false">
+				<span ng-bind="componente.alias"></span>
+			</md-checkbox>
+		</div>
+		
+		<!-- Componente: TextArea -->
+		<div 
+			ng-if="ehTipo('textarea', componente)" 
+			flex="{{tamanhoFlex(componente)}}">
+			<md-input-container class="md-block">
+       			<label
+       				ng-bind="componente.alias"></label>
+       			<textarea 
+			       	ng-model="componente.modelo[componente.ultimaReferencia]" 
+			       	name="{{componente.referencia}}" 
+			       	ng-disabled="componente.habilitado===false"
+			       	ng-required="componente.validacao.required.valor"
+					minlength="{{componente.validacao.minlength.valor}}"
+			       	maxlength="{{componente.validacao.maxlength.valor}}" 
+			       	md-maxlength="{{componente.validacao.maxlength.valor}}" 
+			       	rows="{{componente.detalhamento.linhas}}" 
+			       	md-select-on-focus></textarea>
+       			<div 
+					ng-messages="masterForm[componente.referencia].$error" 
+					md-auto-hide="false" 
+					role="alert">
+					<div 
+						ng-repeat="(validacao, opcoes) in componente.validacao" 
+						ng-message="{{validacao}}" ng-bind="opcoes.erro"></div>
+				</div>
+	        </md-input-container>
+	    </div>
+	    
+	    <!-- Componente : GRADE DE EXIBICAO -->
+	    <div 
+			ng-if="ehTipo('gradeExibicao', componente)" 
+			flex="{{tamanhoFlex(componente)}}">
+			<ecv-grade componente="componente" data="data"></ecv-grade>
+		</div>
+		
+		<!-- Componente : GRADE DE EXIBICAO DETALHE -->
+	    <div 
+			ng-if="ehTipo('gradeExibicaoDetalhe', componente)" 
+			flex="{{tamanhoFlex(componente)}}">
+			<ecv-grade-detalhe componente="componente" data="data"></ecv-grade-detalhe>
+		</div>
+	    
+	    <md-tooltip ng-if="debug">{{componente}}</md-tooltip>
+	</div>	
+</div>

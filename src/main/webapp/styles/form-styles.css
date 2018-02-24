@@ -1,0 +1,70 @@
+.ecv-imagem{
+	border-width: 4px;
+	border-style: solid;
+	border-color: rgba(95,75,144,0.75) rgba(95,75,144,0.9) rgb(95,75,144) rgba(95,75,144,0.75);
+	border-radius: 10px;
+}
+
+/* ANIMAÇÕES */
+
+/* Slide Down */
+@keyframes ecv-slidedown-show {
+  from {
+    max-height: 0; opacity: 0;
+  }
+  to {
+    max-height: 40px; opacity: 1;
+  }
+}
+@keyframes ecv-slidedown-hide {
+  from {
+    max-height: 40px; opacity: 1;
+  }
+  to {
+    max-height: 0; opacity: 0;
+  }
+}
+
+.ecv-slidedown.ng-enter {
+  animation: 1s ecv-slidedown-show;
+}
+
+.ecv-slidedown.ng-leave {
+  animation: 1s ecv-slidedown-hide;
+}
+/* Slide Down - Final */
+
+/* Fade */
+@keyframes ecv-fade-show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes ecv-fade-hide {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.ecv-fade-1s.ng-enter {
+  animation: 1s ecv-slidedown-show;
+}
+
+.ecv-fade-1s.ng-leave {
+  animation: 1s ecv-slidedown-hide;
+}
+
+.ecv-fade-0.5s.ng-enter {
+  animation: 0.5s ecv-slidedown-show;
+}
+
+.ecv-fade-0.5s.ng-leave {
+  animation: 0.5s ecv-slidedown-hide;
+}
+/* Fade - End*/

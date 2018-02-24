@@ -1,0 +1,30 @@
+<div layout="row">
+	<md-input-container flex="{{tamanhoFlex(componente)}}" ng-click="modalMdAutocomplete(componente, $event)"> 
+	<!-- Placeholder -->
+		<label 
+			ng-bind="componente.alias"></label> 
+		<!-- Input -->
+		<input 
+			ng-model="componente.modelo[componente.ultimaReferencia][componente.detalhamento.descricao]"
+			name="{{componente.referencia}}"
+			ng-disabled="true" 
+			ng-required="componente.validacao.required.valor"
+			 />
+		<!-- Validações --> 
+		<div 
+			ng-messages="masterForm[componente.referencia].$error" 
+			md-auto-hide="false" 
+			role="alert">
+			<div 
+				ng-repeat="(validacao, opcoes) in componente.validacao" 
+				ng-message="{{validacao}}" ng-bind="opcoes.erro"></div>
+	 	</div>
+	</md-input-container>
+	<md-button
+		tabindex="-1"
+		class="md-icon-button" 
+		ng-click="modalMdAutocomplete(componente, $event)" 
+		aria-label="{{componente.alias}}">
+		<i class="fa fa-search" aria-hidden="true"></i>				
+	</md-button>
+</div>

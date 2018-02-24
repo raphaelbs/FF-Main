@@ -1,0 +1,13 @@
+<md-input-container class="md-block">
+    <label ng-bind="alias"></label>
+	<md-select 
+		name="{{referencia}}"
+		ng-disabled="desabilitado"
+		ng-model="modelo"
+		ng-required="obrigatorio">
+        <md-option ng-value="opcao" ng-repeat="opcao in opcoes | orderBy : descricao">
+        	{{ opcao[descricao] }}
+        </md-option>
+	</md-select>
+	<ng-transclude></ng-transclude>
+</md-input-container>

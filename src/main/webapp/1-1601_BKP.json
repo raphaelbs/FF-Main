@@ -1,0 +1,279 @@
+{  
+    "nome":"Banco/Agência",
+    "tipo":"MASTER / DETAIL",
+    "validade": "2016-11-09T18:35:41.552Z",
+    "crud":[  
+        {  
+            "alias":"Novo",
+            "funcionalidade":"novo",
+            "icone":"fa fa-file-o",
+            "habilitado":false,
+            "visivel":true
+        },
+        {  
+            "alias":"Listar",
+            "funcionalidade":"listar",
+            "icone":"fa fa-search",
+            "habilitado":true,
+            "visivel":true
+        },
+        {  
+            "alias":"Deletar",
+            "funcionalidade":"deletar",
+            "icone":"fa fa-trash-o",
+            "habilitado":false,
+            "visivel":true
+        },
+        {  
+            "alias":"Gravar",
+            "funcionalidade":"salvar",
+            "icone":"fa fa-floppy-o",
+            "habilitado":true,
+            "visivel":true
+        }
+    ],
+    "telas":[  
+        {  
+            "nome":"Formulário",
+            "tipo":"TELA DE CADASTRO",
+            "guias":[  
+                {  
+                    "tipo":"MASTER",
+                    "nome":"Informações principais",
+                    "container":0,
+                    "campos":[  
+                        {  
+                            "alias":"Cód. Banco",
+                            "referencia":"t1006.c3_1006",
+                            "descricao":"Código do banco, geralmente possui de 1 à 3 dígitos.",
+                            "tipo":"number",
+                            "habilitado":true,
+                            "visivel":true,
+                            "icone":"fa fa-key",
+                            "posicao":{  
+                                "padrao":33
+                            },
+                            "validacao":{  
+                                "maxlength":{  
+                                    "valor":6,
+                                    "erro":"máximo 6 dígitos"
+                                },
+                                "required":{  
+                                    "valor":"required",
+                                    "erro":"Campo obrigatório"
+                                }
+                            }
+                        },
+                        {  
+                            "alias":"Descrição",
+                            "referencia":"t1006.c2_1006",
+                            "descricao":"Breve descrição da agência",
+                            "tipo":"text",
+                            "habilitado":true,
+                            "visivel":true,
+                            "posicao":{  
+                                "padrao":60
+                            },
+                            "validacao":{  
+                                "maxlength":{  
+                                    "valor":40,
+                                    "erro":"máximo 40 digitos"
+                                }
+                            }
+                        },
+                        {  
+                            "alias":"Nome fantasia",
+                            "referencia":"t1006.c1_1006",
+                            "tipo":"text",
+                            "habilitado":true,
+                            "visivel":true,
+                            "posicao":{  
+                                "padrao":100
+                            },
+                            "validacao":{  
+                                "minlength":{  
+                                    "valor":10,
+                                    "erro":"mínimo 10 digitos"
+                                },
+                                "maxlength":{  
+                                    "valor":40,
+                                    "erro":"máximo 40 digitos"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {  
+                    "nome":"Endereço",
+                    "tipo":"DETAIL - SIMPLES INCREMENTAL",
+                    "container":1,
+                    "campos":[  
+                        {  
+                            "alias":"Decrição",
+                            "referencia":"t6001.c2_6001",
+                            "tipo":"text",
+                            "descricao":"Resumo das informações do endereço",
+                            "habilitado":false,
+                            "visivel":true,
+                            "posicao":{  
+                                "padrao":100
+                            },
+                            "validacao":{  
+                                "maxlength":{  
+                                    "valor":400,
+                                    "erro":"Tamanho máximo 400 caracteres"
+                                },
+                                "pattern":{  
+                                    "valor":"/^\\d{5}-\\d{3}$/",
+                                    "erro":"00000-000"
+                                }
+                            }
+                        },
+                        {  
+                            "alias":"CEP",
+                            "referencia":"t6001.c13_6001",
+                            "tipo":"text",
+                            "habilitado":true,
+                            "visivel":true,
+                            "posicao":{  
+                                "xs":50,
+                                "gtXs":30
+                            },
+                            "validacao":{  
+                                "pattern":{  
+                                    "valor":"/^\\d{5}-\\d{3}$/",
+                                    "erro":"00000-000"
+                                }
+                            }
+                        },
+                        {  
+                            "alias":"UF",
+                            "referencia":"t6102.c4_6102",
+                            "tipo":"select",
+                            "habilitado":true,
+                            "visivel":true,
+                            "posicao":{  
+                                "xs":50,
+                                "gtXs":30
+                            },
+                            "detalhamento":{  
+                                "opcoes":"MD_SELECT/UF"
+                            },
+                            "validacao":{  
+                                "required":{  
+                                    "valor":"required"
+                                }
+                            }
+                        },
+                        {  
+                            "alias":"Cidade",
+                            "referencia":"t6201.c2_6201",
+                            "tipo":"text",
+                            "habilitado":true,
+                            "visivel":true,
+                            "posicao":{  
+                                "xs":100,
+                                "gtXs":40
+                            },
+                            "validacao":{  
+                                "required":{  
+                                    "valor":"required"
+                                },
+                                "maxlength":{  
+                                    "valor":40,
+                                    "erro":"Até 40 dígitos"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {  
+                    "nome":"Executivos",
+                    "tipo":"DETAIL - SIMPLES INCREMENTAL",
+                    "container":1,
+                    "campos":[  
+                        {  
+                            "alias":"Imagem de perfil",
+                            "referencia":"cImagem",
+                            "tipo":"imagem",
+                            "descricao":"imagem de perfil",
+                            "habilitado":true,
+                            "visivel":true,
+                            "detalhamento":{  
+                                "altura":150,
+                                "largura":150,
+                                "imagemPadrao":"images/avatar.png",
+                                "extensoesPermitidas":".jpg, .png, .jpeg"
+                            },
+                            "posicao":{  
+                                "padrao":100
+                            },
+                            "validacao":{  
+                                "required":{  
+                                    "valor":"required"
+                                }
+                            }
+                        },
+                        {  
+                            "alias":"Obrigatório",
+                            "referencia":"cCheckbox",
+                            "tipo":"checkbox",
+                            "descricao":"campo obrigatório",
+                            "habilitado":true,
+                            "visivel":true,
+                            "posicao":{  
+                                "xs":100,
+                                "gtXs":40
+                            },
+                            "validacao":{  
+                                "required":{  
+                                    "valor":"required"
+                                }
+                            }
+                        },
+                        {  
+                            "alias":"Disserte sobre suas habilidades",
+                            "referencia":"cTextArea",
+                            "tipo":"textarea",
+                            "descricao":"suas habilidades",
+                            "detalhamento":{  
+                                "linhas":2
+                            },
+                            "habilitado":true,
+                            "visivel":true,
+                            "posicao":{  
+                                "xs":100,
+                                "gtXs":40
+                            },
+                            "validacao":{  
+                                "required":{  
+                                    "valor":"required"
+                                },
+                                "maxlength":{  
+                                    "valor":40,
+                                    "erro":"Até 40 dígitos"
+                                },
+                                "minlength":{  
+                                    "valor":10,
+                                    "erro":"Pelo menos 10 dígitos"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {  
+            "nome":"Grade de Exibição",
+            "tipo":"TELA DE PESQUISA",
+            "guias":[  
+                {  
+                    "nome":"Consulta Bancos"
+                },
+                {  
+                    "nome":"Consulta Agências"
+                }
+            ]
+        }
+    ]
+}

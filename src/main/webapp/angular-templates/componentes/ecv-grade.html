@@ -1,0 +1,16 @@
+<md-button 
+	class="md-raised md-primary"
+	layout layout-align="center center" 
+	ng-click="recarregar()">
+	<i class="material-icons">refresh</i>
+	<span>Atualizar</span>
+	<md-tooltip md-delay="1000" md-direction="right">Recarrega os dados da grade de exibição abaixo.</md-tooltip>
+</md-button>
+<table 
+	datatable="" 
+	ng-if="componente.autorizado"
+	dt-options="componente.detalhamento.data"
+	dt-columns="componente.detalhamento.colunas" 
+	dt-instance="componente.detalhamento.instancia"
+	class="row-border hover">
+</table>

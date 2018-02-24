@@ -1,0 +1,948 @@
+<md-content layout="column" layout-fill ng-cloak>
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<md-button 
+				ng-click="toggleMenu()"
+	            class="md-icon-button" 
+	            aria-label="Menu">
+	            <i class="fa fa-bars" aria-hidden="true"></i>
+	        </md-button>
+	        
+			<!-- NOME DO FORMULARIO -->
+			<h2 class="md-flex">Cadastro de formulário 1.2 - 03/2017</h2>
+			<span flex></span>
+			
+			<div layout layout-align="end center">
+				<!-- SWITCH: DEBUG -->
+				<div layout layout-margin>
+					<md-switch ng-model="debug" aria-label="Debug" flex></md-switch>
+					<md-tooltip>
+		        		<span>Debug</span>
+		        	</md-tooltip>
+				</div>
+			</div>
+			
+		</div>
+	</md-toolbar>
+	<md-content flex>
+		<!-- TELAS DO FORMULÁRIO -->
+		<md-tabs md-dynamic-height md-border-bottom md-selected="telaSelecionada">
+		
+			<md-tab label="GRADE DE EXIBIÇÃO">
+				<div layout layout-margin layout-padding layout-align="center stretch">
+					<md-content md-whiteframe="3" flex="100">
+						<ecv-html-grade
+							flex="100"
+							deletar="gradeFormularios.deletar"
+							editar="gradeFormularios.editar"
+							modelo="modelos"
+							cabecalho-grade="FORMULARIO/DADOS/38?banco=bd_0&idioma=1601&itens=2001000,2001001">
+						</ecv-html-grade>
+					</md-content>
+				</div>
+			</md-tab>
+			
+			<md-tab label="INFORMAÇÕES GERAIS">
+				<div layout="column" layout-margin>
+					<div md-whiteframe="3">
+						<md-tabs md-selected="detalheSelecionado">
+						
+							<!-- DADOS DO FORMULARIO -->
+							<md-tab label="Formulário">
+								<form role="form" name="formFormulario" 
+									layout="column" ng-submit="validar(formFormulario, 'FORM')">
+									
+									<topico>
+										<topico-titulo>Informações Básicas do Formulário</topico-titulo>
+										<topico-botoes layout layout-align="end center">
+											<md-button 	
+												class="md-icon-button md-primary"
+												type="button"
+												aria-label="Novo" 
+												ng-disabled="!modelo.c2_201"
+												ng-click="acaoCrud('NOVO')">
+												<i class="material-icons">autorenew</i>
+									        	<md-tooltip>
+									        		<span>Novo</span>
+									        	</md-tooltip>
+									        </md-button>
+									        <md-button 	
+												class="md-icon-button md-primary"
+												type="submit"
+												aria-label="Gravar">
+												<i ng-show="!botoes.gravarFormCarregando" class="material-icons">save</i>
+									        	<md-progress-circular ng-show="botoes.gravarFormCarregando" class="md-accent" md-diameter="20"></md-progress-circular>
+									        	<md-tooltip>
+									        		<span>Gravar</span>
+									        	</md-tooltip>
+									        </md-button>
+										</topico-botoes>
+										<topico-conteudo layout layout-wrap>
+											<md-input-container flex="20"> 
+												<label>Id - Chave</label> 
+												<input 
+													ng-model="modelo.c1_201"
+													name="c1_201"
+													ng-disabled="true"
+													type="number" />
+											</md-input-container>
+											
+											<md-input-container flex="40"> 
+												<label>Descritivo</label> 
+												<input 
+													ng-model="modelo.c2_201"
+													name="c2_201"
+													ng-required="true"/>
+												<div 
+													ng-messages="formFormulario.c2_201.$error" 
+													md-auto-hide="false" 
+													role="alert">
+													<div ng-message="required">Obrigatório</div>
+											 	</div>
+											</md-input-container>
+										
+											<ecv-combobox
+												flex="40"
+												obrigatorio="true"
+												referencia="c3_201_5002"
+												alias="Tipo de formulário"
+												modelo="modelo.c3_201_5002"
+												ajax="FORMULARIO/MD_SELECT/10?banco=bd_0&tipo=53"
+												descricao="c4_5002">
+												<div 
+													ng-messages="formFormulario.c3_201_5002.$error"
+													md-auto-hide="false" 
+													role="alert">
+													<div ng-message="required">Obrigatório</div>
+											 	</div>
+											</ecv-combobox>
+											
+											<ecv-html-autocomplete
+												input-alias="c2_801"
+												flex="100"
+												alias="Nome usual"
+												modelo="modelo.c4_201_801"
+												referencia="c4_201_801"
+												habilitado="true"
+												opcoes="FORMULARIO/MD_SELECT/20?banco=bd_0">
+											</ecv-html-autocomplete>
+										</topico-conteudo>
+									</topico>
+									
+									<topico>
+										<topico-titulo>Telas do Formulário</topico-titulo>
+										<topico-conteudo layout layout-wrap>
+											<ecv-html-grade
+												flex="100"
+												deletar="gradeTelas.deletar"
+												editar="gradeTelas.editar"
+												modelo="modelo.t202C2"
+												cabecalho-grade="FORMULARIO/DADOS/38?banco=bd_0&idioma=1601&itens=2010001,2010003">
+											</ecv-html-grade>
+										</topico-conteudo>
+									</topico>
+								</form>
+							</md-tab>
+							
+							
+							<!-- DADOS DA TELA -->
+							<md-tab label="Tela" ng-show="modeloTela">
+								<form role="form" name="formTela" 
+									layout="column" ng-submit="validar(formTela, 'TELA')">
+									
+									<topico>
+										<topico-titulo>Informações Básicas da Tela</topico-titulo>
+										<topico-botoes layout layout-align="end center">
+											<md-button 	
+												class="md-icon-button md-primary"
+												type="button"
+												aria-label="Novo" 
+												ng-disabled="!modeloTela.c3_202"
+												ng-click="acaoCrud('NOVO_TELA')">
+												<i class="material-icons">autorenew</i>
+									        	<md-tooltip>
+									        		<span>Novo</span>
+									        	</md-tooltip>
+									        </md-button>
+											<md-button 	
+									        	class="md-icon-button md-primary"
+									        	layout layout-align="space-between center"
+												type="submit"
+												ng-disabled="!modelo.c1_201"
+												aria-label="Gravar" 
+												ng-click="acaoCrud('GRAVAR_TELA')">
+												<i ng-show="!botoes.gravarTelaCarregando" class="material-icons">save</i>
+									        	<md-progress-circular ng-show="botoes.gravarTelaCarregando" class="md-accent" md-diameter="20"></md-progress-circular>
+									        	<md-tooltip>Gravar Tela</md-tooltip>
+									        </md-button>
+										</topico-botoes>
+										<topico-conteudo layout layout-wrap>
+											<md-input-container flex="20"> 
+												<label>Id - Chave</label> 
+												<input 
+													ng-model="modeloTela.c1_202"
+													name="c1_202"
+													ng-disabled="true"
+													type="number" />
+											</md-input-container>
+											
+											<md-input-container flex="40"> 
+												<label>Descritivo</label> 
+												<input 
+													ng-model="modeloTela.c3_202"
+													name="c3_202"
+													ng-required="true"/>
+												<div 
+													ng-messages="formTela.c3_202.$error" 
+													md-auto-hide="false" 
+													role="alert">
+													<div ng-message="required">Obrigatório</div>
+											 	</div>
+											</md-input-container>
+										
+											<ecv-combobox
+												flex="40"
+												obrigatorio="true"
+												referencia="c4_202_5002"
+												alias="Tipo de tela"
+												modelo="modeloTela.c4_202_5002"
+												ajax="FORMULARIO/MD_SELECT/10?banco=bd_0&tipo=54"
+												descricao="c4_5002">
+												<div 
+													ng-messages="formTela.c4_202_5002.$error"
+													md-auto-hide="false" 
+													role="alert">
+													<div ng-message="required">Obrigatório</div>
+											 	</div>
+											</ecv-combobox>
+											
+											<ecv-html-autocomplete
+												input-alias="c2_801"
+												flex="100"
+												alias="Nome usual"
+												modelo="modeloTela.c5_202_801"
+												referencia="c5_202_801"
+												habilitado="true"
+												opcoes="FORMULARIO/MD_SELECT/20?banco=bd_0">
+											</ecv-html-autocomplete>
+										</topico-conteudo>
+									</topico>
+									
+									<topico>
+										<topico-titulo>Guias desta Tela</topico-titulo>
+										<topico-conteudo layout layout-wrap>
+											<ecv-html-grade
+												flex="100"
+												deletar="gradeGuias.deletar"
+												editar="gradeGuias.editar"
+												modelo="modeloTela.t203C3"
+												cabecalho-grade="FORMULARIO/DADOS/38?banco=bd_0&idioma=1601&itens=2110001,2110004">
+											</ecv-html-grade>
+										</topico-conteudo>
+									</topico>
+									
+								</form>
+							</md-tab>
+							
+							
+							<!-- DADOS DA GUIA -->
+							<md-tab label="Guia" ng-show="modeloGuia">
+								<form role="form" name="formGuia" 
+									layout="column" ng-submit="validar(formGuia, 'GUIA')">
+									
+									<topico>
+										<topico-titulo>Informações Básicas da Guia</topico-titulo>
+										<topico-botoes layout layout-align="end center">
+											<md-button 	
+												class="md-icon-button md-primary"
+												type="button"
+												ng-disabled="!modeloGuia.c4_203"
+												aria-label="Novo" 
+												ng-click="acaoCrud('NOVO_GUIA')">
+												<i class="material-icons">autorenew</i>
+									        	<md-tooltip>
+									        		<span>Novo</span>
+									        	</md-tooltip>
+									        </md-button>
+											<md-button 	
+									        	class="md-icon-button md-primary"
+									        	layout layout-align="space-between center"
+												type="submit"
+												ng-disabled="!modelo.c1_201 || !modeloTela.c1_202"
+												aria-label="Gravar" 
+												ng-click="acaoCrud('GRAVAR_GUIA')">
+												<i ng-show="!botoes.gravarGuiaCarregando" class="material-icons">save</i>
+									        	<md-progress-circular ng-show="botoes.gravarGuiaCarregando" class="md-accent" md-diameter="20"></md-progress-circular>
+									        	<md-tooltip>Gravar Guia</md-tooltip>
+									        </md-button>
+										</topico-botoes>
+										<topico-conteudo layout layout-wrap>
+											<md-input-container flex="20"> 
+												<label>Id - Chave</label> 
+												<input 
+													ng-model="modeloGuia.c1_203"
+													name="c1_203"
+													ng-disabled="true"
+													type="number" />
+											</md-input-container>
+											
+											<md-input-container flex="40"> 
+												<label>Descritivo</label> 
+												<input 
+													ng-model="modeloGuia.c4_203"
+													name="c4_203"
+													ng-required="true"/>
+												<div 
+													ng-messages="formGuia.c4_203.$error" 
+													md-auto-hide="false" 
+													role="alert">
+													<div ng-message="required">Obrigatório</div>
+											 	</div>
+											</md-input-container>
+								
+											<ecv-combobox
+												flex="40"
+												obrigatorio="true"
+												referencia="c5_203_5002"
+												alias="Tipo de guia"
+												modelo="modeloGuia.c5_203_5002"
+												ajax="FORMULARIO/MD_SELECT/10?banco=bd_0&tipo=55"
+												descricao="c4_5002">
+												<div 
+													ng-messages="formGuia.c5_203_5002.$error"
+													md-auto-hide="false" 
+													role="alert">
+													<div ng-message="required">Obrigatório</div>
+											 	</div>
+											</ecv-combobox>
+											
+											<md-input-container flex="25"> 
+												<label>Ordenação</label> 
+												<input 
+													ng-model="modeloGuia.c7_203"
+													name="c1_203"
+													type="number" />
+											</md-input-container>
+											
+											<md-input-container flex="25"> 
+												<label>Container</label> 
+												<input 
+													ng-model="modeloGuia.c9_203"
+													name="c9_203"
+													type="number" />
+												<div 
+													ng-messages="formGuia.c4_203.$error" 
+													md-auto-hide="false" 
+													role="alert">
+													<div ng-message="required">Campo obrigatório</div>
+											 	</div>
+											</md-input-container>
+											
+											<ecv-html-autocomplete
+												input-alias="c2_101"
+												flex="50"
+												alias="Tabela de referência"
+												modelo="modeloGuia.c6_203_101"
+												referencia="c6_203_101"
+												habilitado="true"
+												opcoes="FORMULARIO/MD_SELECT/27?banco=bd_0">
+											</ecv-html-autocomplete>
+											
+											<md-input-container flex="50"> 
+												<label>Mapeamento</label> 
+												<input 
+													ng-model="modeloGuia.c10_203"
+													name="c10_203"/>
+												<md-tooltip>Deve conter o array ao qual essa guia ficará responsável por carregar. Ex: t1002C2</md-tooltip>
+											</md-input-container>
+											
+											<ecv-html-autocomplete
+												input-alias="c2_801"
+												flex="50"
+												alias="Nome usual"
+												modelo="modeloGuia.c8_203_801"
+												referencia="c8_203_801"
+												habilitado="true"
+												opcoes="FORMULARIO/MD_SELECT/20?banco=bd_0">
+											</ecv-html-autocomplete>
+										</topico-conteudo>
+									</topico>
+									
+									<topico>
+										<topico-titulo>Componentes desta Guia</topico-titulo>
+										<topico-conteudo layout layout-wrap>
+											<ecv-html-grade
+												flex="100"
+												deletar="gradeComponentes.deletar"
+												editar="gradeComponentes.editar"
+												modelo="modeloGuia.t204C4"
+												cabecalho-grade="FORMULARIO/DADOS/38?banco=bd_0&idioma=1601&itens=2210001,2210005">
+											</ecv-html-grade>
+										</topico-conteudo>
+									</topico>
+									
+								</form>
+							</md-tab>
+							
+							
+							<!-- DADOS DO COMPONENTE -->
+							<md-tab label="Componente" ng-show="modeloComponente">
+								<form role="form" name="formComponente" 
+									layout="column" ng-submit="validar(formComponente, 'COMPONENTE')">
+									
+									<topico>
+										<topico-titulo>Informações Básicas do Componente</topico-titulo>
+										<topico-botoes layout layout-align="end center">
+											<md-button 	
+												class="md-icon-button md-primary"
+												type="button"
+												aria-label="Novo" 
+												ng-disabled="!modeloComponente.c5_204"
+												ng-click="acaoCrud('NOVO_COMPONENTE')">
+												<i class="material-icons">autorenew</i>
+									        	<md-tooltip>
+									        		<span>Novo</span>
+									        	</md-tooltip>
+									        </md-button>
+											<md-button 	
+									        	class="md-icon-button md-primary"
+									        	layout layout-align="space-between center"
+												type="submit"
+												ng-disabled="!modelo.c1_201 || !modeloTela.c1_202 || !modeloGuia.c1_203"
+												aria-label="Gravar" 
+												ng-click="acaoCrud('GRAVAR_COMPONENTE')">
+												<i ng-show="!botoes.gravarComponenteCarregando" class="material-icons">save</i>
+									        	<md-progress-circular ng-show="botoes.gravarComponenteCarregando" class="md-accent" md-diameter="20"></md-progress-circular>
+									        	<md-tooltip>Gravar Componente</md-tooltip>
+									        </md-button>
+										</topico-botoes>
+										<topico-conteudo layout layout-wrap>
+											<md-input-container flex="20"> 
+												<label>Id - Chave</label> 
+												<input 
+													ng-model="modeloComponente.c1_204"
+													name="c1_204"
+													ng-disabled="true"
+													type="number" />
+											</md-input-container>
+											
+											<md-input-container flex="40"> 
+												<label>Descritivo</label> 
+												<input 
+													ng-model="modeloComponente.c5_204"
+													name="c5_204"
+													ng-required="true"/>
+												<div 
+													ng-messages="formComponente.c4_203.$error" 
+													md-auto-hide="false" 
+													role="alert">
+													<div ng-message="required">Campo obrigatório</div>
+											 	</div>
+											</md-input-container>
+											
+											<ecv-combobox
+												flex="40"
+												obrigatorio="true"
+												referencia="c6_204_5002"
+												alias="Tipo de Componente"
+												modelo="modeloComponente.c6_204_5002"
+												ajax="FORMULARIO/MD_SELECT/10?banco=bd_0&tipo=56"
+												descricao="c4_5002">
+												<div 
+													ng-messages="formComponente.c6_204_5002.$error"
+													md-auto-hide="false" 
+													role="alert">
+													<div ng-message="required">Obrigatório</div>
+											 	</div>
+											</ecv-combobox>
+											
+											<ecv-html-autocomplete
+												input-alias="c2_801"
+												flex="50"
+												alias="Label do Componente"
+												modelo="modeloComponente.c7_204_801"
+												referencia="c7_204_801"
+												habilitado="true"
+												opcoes="FORMULARIO/MD_SELECT/20?banco=bd_0">
+											</ecv-html-autocomplete>
+											
+											<ecv-html-autocomplete
+												input-alias="c2_801"
+												flex="50"
+												alias="Dica"
+												modelo="modeloComponente.c12_204_801"
+												referencia="c12_204_801"
+												habilitado="true"
+												opcoes="FORMULARIO/MD_SELECT/20?banco=bd_0">
+											</ecv-html-autocomplete>
+											
+											<ecv-html-autocomplete
+												input-alias="c3_102"
+												flex="50"
+												alias="Referência à Coluna"
+												modelo="modeloComponente.c8_204_102"
+												referencia="c8_204_102"
+												habilitado="true"
+												opcoes="FORMULARIO/MD_SELECT/28?banco=bd_0">
+											</ecv-html-autocomplete>
+		
+											<ecv-html-autocomplete
+												input-alias="c5_204"
+												flex="50"
+												alias="Agrupamento com outro Componente"
+												modelo="modeloComponente.c10_204_204"
+												referencia="c10_204_204"
+												habilitado="true"
+												opcoes="FORMULARIO/MD_SELECT/45?banco=bd_0">
+											</ecv-html-autocomplete>
+											
+											<md-input-container flex="10"> 
+												<label>Ordenação</label> 
+												<input 
+													ng-model="modeloComponente.c11_204"
+													name="c11_204"
+													type="number" />
+											</md-input-container>
+											
+											<md-input-container flex="40"> 
+												<label>Mapeamento</label> 
+												<input 
+													ng-model="modeloComponente.c9_204"
+													name="c9_204"
+													type="text" />
+												<div 
+													ng-messages="formComponente.c9_204.$error" 
+													md-auto-hide="false" 
+													role="alert">
+													<div ng-message="required">Campo obrigatório</div>
+												</div>
+												<md-tooltip>Deve conter a referência do objeto mepeado pelo ORM. Ex: t1001[0].c1_1001</md-tooltip>
+											</md-input-container>
+											
+											<md-input-container flex="50"> 
+												<label>Valor padrão</label> 
+												<input 
+													ng-model="modeloComponente.c13_204"
+													name="c13_204"
+													type="text" />
+											</md-input-container>
+										</topico-conteudo>
+									</topico>
+									
+									
+									
+									<topico>
+										<topico-titulo>Características Genéricas</topico-titulo>
+										<topico-conteudo layout layout-wrap>
+											<div flex="100" layout layout-align="center center">
+												<md-input-container flex="20"> 
+													<label>Ordem Padrão</label> 
+													<input 
+														ng-model="modeloComponente.tipo.t7305.c8_206"
+														name="tipo.t7305" />
+												</md-input-container>
+												<md-checkbox
+													flex-offset="5"
+													flex="15" 
+													name="tipo.t5702"
+													ng-true-value="'SIM'"
+		             								ng-false-value="'NÃO'"
+													ng-model="modeloComponente.tipo.t5702.c8_206"
+													aria-label="Visível" layout layout-align="none center">
+													<span>Visível</span>
+												</md-checkbox>
+												
+												<md-checkbox
+													flex="15" 
+													name="tipo.t5701"
+													ng-model="modeloComponente.tipo.t5701.c8_206"
+													ng-true-value="'SIM'"
+		             								ng-false-value="'NÃO'"
+													aria-label="Habilitado" layout layout-align="none center">
+													<span>Habilitado</span>
+												</md-checkbox>
+												
+												<md-checkbox
+													flex="15" 
+													name="tipo.t6208"
+													ng-model="modeloComponente.tipo.t6208.c8_206"
+													ng-true-value="'required'"
+		             								ng-false-value="''"
+													aria-label="Obrigatório" layout layout-align="none center">
+													<span>Obrigatório</span>
+												</md-checkbox>
+											</div>
+										</topico-conteudo>
+									</topico>
+									
+									<topico>
+										<topico-titulo>Características por Tipo <span ng-bind="modeloComponente.c6_204_5002.c4_5002"></span></topico-titulo>
+										<topico-conteudo layout layout-wrap>
+											<div ng-switch="modeloComponente.c6_204_5002.c1_5002" flex="100">
+											
+												<!-- TIPO TEXTO -->
+												<div ng-switch-when="5601" layout layout-wrap>
+													<md-input-container flex="50"> 
+														<label>Validação: Expressão regular</label> 
+														<input 
+															placeholder="Ex: ^\d.$"
+															ng-model="modeloComponente.tipo.t6207.c8_206"
+															name="t5601.t6207.c8_206"
+															type="text" />
+													</md-input-container>
+													
+													<ecv-html-autocomplete
+														input-alias="c2_801"
+														flex="50"
+														alias="Mensagem de erro correspondente"
+														modelo="modeloComponente.tipo.t6207.c9_206_801"
+														referencia="t5601.t6207.c9_206_801"
+														habilitado="true"
+														opcoes="FORMULARIO/MD_SELECT/20?banco=bd_0">
+													</ecv-html-autocomplete>
+												
+													<md-input-container flex="50"> 
+														<label>Validação: Caracteres mínimos</label> 
+														<input 
+															ng-model="modeloComponente.tipo.t6209.c8_206"
+															placeholder="Ex: 2"
+															name="t5601.t6209.c8_206"
+															type="text" />
+													</md-input-container>
+													
+													<ecv-html-autocomplete
+														input-alias="c2_801"
+														flex="50"
+														alias="Mensagem de erro correspondente"
+														modelo="modeloComponente.tipo.t6209.c9_206_801"
+														referencia="t5601.t6209.c9_206_801"
+														habilitado="true"
+														opcoes="FORMULARIO/MD_SELECT/20?banco=bd_0">
+													</ecv-html-autocomplete>
+													
+													<md-input-container flex="50"> 
+														<label>Validação: Caracteres máximos</label> 
+														<input 
+															ng-model="modeloComponente.tipo.t6210.c8_206"
+															placeholder="Ex: 10"
+															name="t5601.t6210.c8_206"
+															type="text" />
+													</md-input-container>
+													
+													<ecv-html-autocomplete
+														input-alias="c2_801"
+														flex="50"
+														alias="Mensagem de erro correspondente"
+														modelo="modeloComponente.tipo.t6210.c9_206_801"
+														referencia="t5601.t6210.c9_206_801"
+														habilitado="true"
+														opcoes="FORMULARIO/MD_SELECT/20?banco=bd_0">
+													</ecv-html-autocomplete>
+												</div>
+									
+												<!-- TIPO COMBOBOX -->
+												<div ng-switch-when="5602" layout>
+													<md-input-container flex="50"> 
+														<label>URL com Opções</label> 
+														<input 
+															placeholder="Ex: FORMULARIO/CHAMADA..."
+															ng-model="modeloComponente.tipo.t7508.c8_206"
+															name="t5602.t7508"
+															type="text" />
+													</md-input-container>
+													
+													<md-input-container flex="50"> 
+														<label>Chave identificadora</label> 
+														<input 
+															placeholder="Ex: c4_5002"
+															ng-model="modeloComponente.tipo.t7513.c8_206"
+															name="t5602.t7513"
+															type="text" />
+													</md-input-container>
+												</div>
+												
+												<!-- TIPO AUTOCOMPLETE -->
+												<div ng-switch-when="5608" layout>
+													<md-input-container flex="50"> 
+														<label>URL com Opções</label> 
+														<input 
+															placeholder="Ex: FORMULARIO/CHAMADA..."
+															ng-model="modeloComponente.tipo.t7508.c8_206"
+															name="t5608.t7508"
+															type="text" />
+													</md-input-container>
+													
+													<md-input-container flex="30"> 
+														<label>Chave identificadora</label> 
+														<input 
+															placeholder="Ex: c4_5002"
+															ng-model="modeloComponente.tipo.t7513.c8_206"
+															name="t5608.t7513"
+															type="text" />
+													</md-input-container>
+													
+													<md-input-container flex="20"> 
+														<label>Caracteres Mínimos</label> 
+														<input 
+															placeholder="Ex: 5"
+															ng-model="modeloComponente.tipo.t7510.c8_206"
+															name="t5608.t7513"
+															type="text" />
+													</md-input-container>
+												</div>
+												
+												<!-- TIPO GRADE DE EXIBIÇÃO -->
+												<div ng-switch-when="5609" layout>
+													<md-input-container flex="35"> 
+														<label>URL com o cabeçalho da Grade</label> 
+														<input 
+															placeholder="Ex: FORMULARIO/CHAMADA..."
+															ng-model="modeloComponente.tipo.t7511.c8_206"
+															name="t5609.t7511"
+															type="text" />
+													</md-input-container>
+												
+													<md-input-container flex="35"> 
+														<label>URL com os dados da Grade</label> 
+														<input 
+															placeholder="Ex: FORMULARIO/CHAMADA..."
+															ng-model="modeloComponente.tipo.t7508.c8_206"
+															name="t5609.t7508"
+															type="text" />
+													</md-input-container>
+													
+													<md-input-container flex="30"> 
+														<label>URL para pesquisa do detalhe</label> 
+														<input 
+															placeholder="Ex: T1001"
+															ng-model="modeloComponente.tipo.t7512.c8_206"
+															name="t5609.t7512"
+															type="text" />
+													</md-input-container>
+												</div>
+												
+												<!-- TIPO GRADE DE EXIBIÇÃO - DETALHE -->
+												<div ng-switch-when="5611" layout>
+													<md-input-container flex="35"> 
+														<label>URL com o cabeçalho da Grade</label> 
+														<input 
+															placeholder="Ex: FORMULARIO/CHAMADA..."
+															ng-model="modeloComponente.tipo.t7511.c8_206"
+															name="t5611.t7511"
+															type="text" />
+													</md-input-container>
+													
+													<md-input-container flex="35"> 
+														<label>URL de pesquisa do detalhe</label> 
+														<input 
+															placeholder="Ex: T1001"
+															ng-model="modeloComponente.tipo.t7512.c8_206"
+															name="t5611.t7512"
+															type="text" />
+													</md-input-container>
+												
+													<md-input-container flex="30"> 
+														<label>ID do Formulário à carregar</label> 
+														<input 
+															placeholder="Ex: 7"
+															ng-model="modeloComponente.tipo.t7514.c8_206"
+															name="t5611.t7514"
+															type="text" />
+													</md-input-container>
+												</div>
+												
+												<!-- TIPO IMAGEM -->
+												<div ng-switch-when="5606" layout>
+													<md-input-container flex="15"> 
+														<label>Altura</label> 
+														<input 
+															placeholder="Ex: 150"
+															ng-model="modeloComponente.tipo.t7501.c8_206"
+															name="t5606.t7501"
+															type="text" />
+													</md-input-container>
+													
+													<md-input-container flex="15"> 
+														<label>Largura</label> 
+														<input 
+															placeholder="Ex: 150"
+															ng-model="modeloComponente.tipo.t7502.c8_206"
+															name="t5606.t7502"
+															type="text" />
+													</md-input-container>
+													
+													<md-input-container flex="30"> 
+														<label>URL de imagem padrão</label> 
+														<input 
+															placeholder="Ex: imagem/usuario.png"
+															ng-model="modeloComponente.tipo.t7503.c8_206"
+															name="t5606.t7503"
+															type="text" />
+													</md-input-container>
+													
+													<md-input-container flex="40"> 
+														<label>Extensões permitidas</label> 
+														<input 
+															placeholder="Ex: .png, .jpg, .jpeg"
+															ng-model="modeloComponente.tipo.t7504.c8_206"
+															name="t5606.t7504"
+															type="text" />
+													</md-input-container>
+												</div>
+												
+											</div>
+										</topico-conteudo>
+									</topico>
+									
+									<topico>
+										<topico-titulo>Detalhes do Componente</topico-titulo>
+										<topico-conteudo layout layout-wrap>
+											<ecv-html-grade
+												flex="100"
+												deletar="gradeDetalhes.deletar"
+												editar="gradeDetalhes.editar"
+												modelo="modeloComponente.t206C5"
+												cabecalho-grade="FORMULARIO/DADOS/38?banco=bd_0&idioma=1601&itens=2310001,2310008">
+											</ecv-html-grade>
+										</topico-conteudo>
+									</topico>
+
+								</form>
+							</md-tab>
+							
+							<!-- DETALHES DO COMPONENTE -->
+							<md-tab label="Detalhes" ng-show="modeloDetalhe">
+								<form role="form" name="formDetalhes" 
+									layout="column" ng-submit="validar(formDetalhes, 'DETALHE')">
+									
+									<topico>
+										<topico-titulo>Informações básicas</topico-titulo>
+										<topico-botoes layout layout-align="end center">
+											<md-button 	
+												class="md-icon-button md-primary"
+												type="button"
+												aria-label="Novo" 
+												ng-disabled="!modeloDetalhe.c8_206"
+												ng-click="acaoCrud('NOVO_DETALHE')">
+												<i class="material-icons">autorenew</i>
+									        	<md-tooltip>
+									        		<span>Novo</span>
+									        	</md-tooltip>
+									        </md-button>
+											<md-button 	
+									        	class="md-icon-button md-primary"
+									        	layout layout-align="space-between center"
+												type="submit"
+												ng-disabled="!modelo.c1_201 || !modeloTela.c1_202 || !modeloGuia.c1_203 || !modeloComponente.c1_204"
+												aria-label="Gravar" 
+												ng-click="acaoCrud('GRAVAR_DETALHE')">
+												<i ng-show="!botoes.gravarDetalheCarregando" class="material-icons">save</i>
+									        	<md-progress-circular ng-show="botoes.gravarDetalheCarregando" class="md-accent" md-diameter="20"></md-progress-circular>
+									        	<md-tooltip>Gravar Detalhe</md-tooltip>
+									        </md-button>
+										</topico-botoes>
+										<topico-conteudo layout layout-wrap>
+											<md-input-container flex="20"> 
+												<label>Id - Chave</label> 
+												<input 
+													ng-model="modeloDetalhe.c1_206"
+													name="c1_206"
+													ng-disabled="true"
+													type="number" />
+											</md-input-container>
+											
+											<md-input-container flex="40"> 
+												<label>Descritivo/Valor</label> 
+												<input 
+													ng-model="modeloDetalhe.c8_206"
+													name="c8_206"
+													ng-required="true"/>
+												<div 
+													ng-messages="formDetalhes.c8_206.$error" 
+													md-auto-hide="false" 
+													role="alert">
+													<div ng-message="required">Obrigatório</div>
+											 	</div>
+											</md-input-container>
+										
+											<ecv-html-autocomplete
+												input-alias="c4_5002"
+												flex="50"
+												alias="Tipo de Detalhe"
+												modelo="modeloDetalhe.c6_206_5002"
+												referencia="c6_206_5002"
+												habilitado="true"
+												opcoes="FORMULARIO/MD_SELECT/46?banco=bd_0&tipo=57,62,71,72,73,74,75">
+												<div 
+													ng-messages="formDetalhes.c6_206_5002.$error"
+													md-auto-hide="false" 
+													role="alert">
+													<div ng-message="required">Obrigatório</div>
+											 	</div>
+											</ecv-html-autocomplete>
+											
+											<ecv-combobox
+												flex="50"
+												referencia="c7_206_5002"
+												alias="Tipo de Componente"
+												modelo="modeloDetalhe.c7_206_5002"
+												ajax="FORMULARIO/MD_SELECT/10?banco=bd_0&tipo=0"
+												descricao="c4_5002">
+											</ecv-combobox>
+											
+											<ecv-html-autocomplete
+												input-alias="c2_801"
+												flex="100"
+												alias="Nome usual"
+												modelo="modeloDetalhe.c9_206_801"
+												referencia="c9_206_801"
+												habilitado="true"
+												opcoes="FORMULARIO/MD_SELECT/20?banco=bd_0">
+											</ecv-html-autocomplete>
+										</topico-conteudo>
+									</topico>
+									
+								</form>
+							</md-tab>
+							
+						</md-tabs>
+					</div>
+				</div>
+			</md-tab>
+			
+			<md-tab label="DEBUG" ng-if="debug">
+				<div layout="column" layout-margin>
+					<div md-whiteframe="3">
+						<md-tabs md-dynamic-height>
+							<md-tab label="Modelo Form" layout="column" layout-padding layout-margin layout-fill>
+								<md-content layout layout-margin layout-padding>
+									<json-formatter open="1" json="modelo"></json-formatter>
+								</md-content>
+							</md-tab>
+							<md-tab label="Modelo Tela" layout="column" layout-padding layout-margin layout-fill>
+								<md-content layout layout-margin layout-padding>
+									<json-formatter open="1" json="modeloTela"></json-formatter>
+								</md-content>
+							</md-tab>
+							<md-tab label="Modelo Guia" layout="column" layout-padding layout-margin layout-fill>
+								<md-content layout layout-margin layout-padding>
+									<json-formatter open="1" json="modeloGuia"></json-formatter>
+								</md-content>
+							</md-tab>
+							<md-tab label="Modelo Componente" layout="column" layout-padding layout-margin layout-fill>
+								<md-content layout layout-margin layout-padding>
+									<json-formatter open="1" json="modeloComponente"></json-formatter>
+								</md-content>
+							</md-tab>
+							<md-tab label="Modelo Detalhe" layout="column" layout-padding layout-margin layout-fill>
+								<md-content layout layout-margin layout-padding>
+									<json-formatter open="1" json="modeloDetalhe"></json-formatter>
+								</md-content>
+							</md-tab>
+						</md-tabs>
+					</div>
+				</div>
+			</md-tab>
+		</md-tabs>
+	</md-content>
+</md-content>

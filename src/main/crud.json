@@ -1,0 +1,30 @@
+[  
+    {  
+        "alias":"Novo",
+        "funcionalidade":"novo",
+        "icone":"fa fa-file-o",
+        "habilitado":true,
+        "visivel":true
+    },
+    {  
+        "alias":"Listar",
+        "funcionalidade":"listar",
+        "icone":"fa fa-search",
+        "habilitado":true,
+        "visivel":true
+    },
+    {  
+        "alias":"Deletar",
+        "funcionalidade":"deletar",
+        "icone":"fa fa-trash-o",
+        "habilitado":true,
+        "visivel":true
+    },
+    {  
+        "alias":"Gravar",
+        "funcionalidade":"salvar",
+        "icone":"fa fa-floppy-o",
+        "habilitado":true,
+        "visivel":true
+    }
+]

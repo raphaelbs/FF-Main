@@ -1,0 +1,9 @@
+<div layout="column" layout-align="center center" ng-click="uploadImagem($event)">
+	<img
+		flex="100" 
+		class="ecv-imagem" 
+		ng-src="{{componente.modelo[componente.ultimaReferencia] || componente.detalhamento.imagemPadrao}}"
+		width="{{componente.detalhamento.largura}}" 
+		height="auto" />
+	<span flex ng-bind="componenteLegenda.modelo[componenteLegenda.ultimaReferencia] || 'legenda'"></span>
+</div>

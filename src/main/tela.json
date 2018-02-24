@@ -1,0 +1,16 @@
+{  
+    "nome":"Formulário",
+    "tipo":"TP_TELA_FORMULARIO",
+    "guias":[  
+        {  
+            "tipo":"TP_GUIA_MASTER",
+            "nome":"Informações principais",
+            "campos":[]
+        },
+        {  
+            "tipo":"TP_GUIA_DETALHES",
+            "nome":"Informações complementares",
+            "subguias":[]
+        }
+    ]
+}

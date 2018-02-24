@@ -1,0 +1,144 @@
+[  
+    {  
+        "alias":"Cód. Banco",
+        "referencia":"t1006.c3_1006",
+        "descricao":"Código do banco, geralmente possui de 1 à 3 dígitos.",
+        "tipo":"number",
+        "habilitado":true,
+        "visivel":true,
+        "icone":"fa fa-key",
+        "posicao":{  
+            "padrao":33
+        },
+        "validacao":{  
+            "maxlength":{  
+                "valor":6,
+                "erro":"máximo 6 dígitos"
+            },
+            "required":{  
+                "valor":"required",
+                "erro":"Campo obrigatório"
+            }
+        }
+    },
+    {  
+        "alias":"Nome fantasia",
+        "referencia":"t1006.c1_1006",
+        "tipo":"text",
+        "habilitado":true,
+        "visivel":true,
+        "posicao":{  
+            "padrao":100
+        },
+        "validacao":{  
+            "minlength":{  
+                "valor":10,
+                "erro":"mínimo 10 digitos"
+            },
+            "maxlength":{  
+                "valor":40,
+                "erro":"máximo 40 digitos"
+            }
+        }
+    },
+    {  
+        "alias":"CEP",
+        "referencia":"t1006.c0_1006",
+        "tipo":"text",
+        "habilitado":true,
+        "visivel":true,
+        "icone":"",
+        "posicao":{  
+            "padrao":100
+        },
+        "validacao":{  
+            "pattern":{  
+                "valor":"/^\\d{5}-\\d{3}$/",
+                "erro":"00000-000"
+            }
+        }
+    },
+    {  
+        "alias":"Sexo",
+        "referencia":"t1006.c5_1006",
+        "tipo":"select",
+        "descricao":"Orientação sexual",
+        "habilitado":true,
+        "visivel":true,
+        "icone":"fa fa-users",
+        "posicao":{  
+            "padrao":100
+        },
+        "opcoes":[  
+            {  
+                "id":5902,
+                "referencia":"t5002",
+                "alias":"Feminino"
+            },
+            {  
+                "id":5901,
+                "referencia":"t5002",
+                "alias":"Masculino"
+            }
+        ],
+        "validacao":{  
+            "required":{  
+                "valor":"required"
+            }
+        }
+    },
+    {  
+        "alias":"UF",
+        "referencia":"t6102.c4_6102",
+        "tipo":"select",
+        "habilitado":true,
+        "visivel":true,
+        "posicao":{  
+            "padrao":30
+        },
+        "opcoes":"MD_SELECT/UF",
+        "validacao":{  
+            "required":{  
+                "valor":"required"
+            }
+        }
+    },
+    {  
+        "alias":"Obrigatório",
+        "referencia":"cObrigatorio",
+        "tipo":"checkbox",
+        "habilitado":true,
+        "visivel":true,
+        "posicao":{  
+            "xs":100,
+            "gtXs":40
+        },
+        "validacao":{  
+            "required":{  
+                "valor":"required"
+            }
+        }
+    },
+    {  
+        "alias":"Imagem de perfil",
+        "referencia":"cImagem",
+        "tipo":"imagem",
+        "descricao":"imagem de perfil",
+        "habilitado":true,
+        "visivel":true,
+        "imagem": {
+        	"altura":150,
+	        "largura":150,
+	        "imagemPadrao":"images/avatar.png",
+	        "extensoesPermitidas":".jpg, .png, .jpeg"
+        },
+        "posicao":{  
+            "padrao":100
+        },
+        "validacao":{  
+            "required":{  
+                "valor":"required"
+            }
+        }
+    }
+]
